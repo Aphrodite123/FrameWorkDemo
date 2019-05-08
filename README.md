@@ -1,5 +1,6 @@
 # FrameWorkDemo
 Android base frame
+
 <dependency>
 	<groupId>com.aphrodite.framework</groupId>
 	<artifactId>framework-base</artifactId>
