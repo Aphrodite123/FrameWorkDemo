@@ -16,6 +16,23 @@ public class ToastUtil {
 
     private static Object synObj = new Object();
 
+    /**
+     * Application Context，否则可能出现内存泄漏
+     */
+    private static Context mContext;
+
+    public static void init(Context context) {
+        mContext = context;
+    }
+
+    public static void showMessage(int msg) {
+        showMessage(mContext, msg, Toast.LENGTH_SHORT);
+    }
+
+    public static void showMessage(String msg) {
+        showMessage(mContext, msg, Toast.LENGTH_SHORT);
+    }
+
     public static void showMessage(Context act, final String msg) {
         showMessage(act, msg, Toast.LENGTH_SHORT);
     }
@@ -25,6 +42,10 @@ public class ToastUtil {
     }
 
     public static void showMessage(final Context act, final String msg, final int len) {
+        if (null == act) {
+            return;
+        }
+
         new Thread(new Runnable() {
             public void run() {
                 handler.post(new Runnable() {
@@ -46,6 +67,10 @@ public class ToastUtil {
     }
 
     public static void showMessage(final Context act, final int msg, final int len) {
+        if (null == act) {
+            return;
+        }
+
         new Thread(new Runnable() {
             public void run() {
                 handler.post(new Runnable() {
