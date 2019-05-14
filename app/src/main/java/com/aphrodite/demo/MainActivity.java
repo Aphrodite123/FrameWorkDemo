@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.aphrodite.framework.utils.ToastUtil;
+import com.aphrodite.framework.utils.ToastUtils;
 
 public class MainActivity extends AppCompatActivity {
     private Button mBtn;
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         mBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.showMessage(MainActivity.this, "Welcom to my world.");
+                ToastUtils.showMessage(MainActivity.this, "Welcom to my world.");
             }
         });
     }

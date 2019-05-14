@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">framework</string>
+
+    <!--Unit-->
+    <string name="unit_cm">厘米</string>
+    <string name="unit_km">公里</string>
+    <string name="unit_m">米</string>
+    <string name="unit_qian_km">千公里</string>
+    <string name="unit_rmb_yuan">元</string>
+    <string name="unit_volume_m">立方米</string>
+    <string name="unit_wan_km">万公里</string>
+    <string name="unit_weight_kg">千克</string>
+
 </resources>

@@ -9,7 +9,7 @@ import android.widget.Toast;
  * Created by Aphrodite on 2017/9/16.
  */
 
-public class ToastUtil {
+public class ToastUtils {
     private static Handler handler = new Handler(Looper.getMainLooper());
 
     private static Toast toast = null;
