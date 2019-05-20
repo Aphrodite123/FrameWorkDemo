@@ -40,10 +40,16 @@ dependencies {
      */
     api dependVersion["glide"]
     /**
+     * Rxjava
+     */
+    api dependVersion["rxjava"]
+    api dependVersion["rxandroid"]
+    /**
      * OkHttp
      */
     api dependVersion["okhttp"]
     api dependVersion["okhttp-okio"]
+    api dependVersion["okhttp-interceptor"]
     /**
      * Retrofit
      */

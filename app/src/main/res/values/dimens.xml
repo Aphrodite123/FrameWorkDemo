@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Toolbar-->
+    <dimen name="toolbar_title_height">48dp</dimen>
+
+</resources>

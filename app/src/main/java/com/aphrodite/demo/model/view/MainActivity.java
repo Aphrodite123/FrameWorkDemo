@@ -1,6 +1,5 @@
 package com.aphrodite.demo.model.view;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,17 +7,24 @@ import android.widget.Button;
 import com.aphrodite.demo.R;
 import com.aphrodite.demo.application.FrameApplication;
 import com.aphrodite.demo.model.api.RequestApi;
-import com.aphrodite.demo.model.bean.GankResult;
+import com.aphrodite.demo.model.bean.BeautyBean;
+import com.aphrodite.demo.model.network.BeautyResponse;
+import com.aphrodite.demo.view.activity.base.BaseActivity;
 import com.aphrodite.framework.utils.NetworkUtils;
 
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+import butterknife.BindView;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+
+public class MainActivity extends BaseActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    private Button mBtn;
+    @BindView(R.id.welcome_btn)
+    Button mBtn;
 
     private RequestApi mRequestApi;
 
@@ -28,15 +34,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        initView();
-        initData();
     }
 
-    private void initView() {
-        mBtn = findViewById(R.id.welcome_btn);
+    @Override
+    protected int getViewId() {
+        return R.layout.activity_main;
+    }
 
+    @Override
+    protected void initView() {
         mBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,7 +51,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void initData() {
+    @Override
+    protected void initListener() {
+
+    }
+
+    @Override
+    protected void initData() {
         mRequestApi = FrameApplication.getRetrofitInit().getRetrofit().create(RequestApi.class);
     }
 
@@ -54,13 +66,22 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        mRequestApi.fetchGankMZ(mDefaultCount, mCurPage)
-                .subscribeOn(Schedulers.newThread())
+        mRequestApi.queryBeauty(mDefaultCount, mCurPage)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<GankResult>() {
+                .subscribe(new Observer<BeautyResponse>() {
                     @Override
-                    public void onCompleted() {
+                    public void onSubscribe(Disposable d) {
 
+                    }
+
+                    @Override
+                    public void onNext(BeautyResponse response) {
+                        if (null == response) {
+                            return;
+                        }
+
+                        List<BeautyBean> beautyBeans = response.getResults();
                     }
 
                     @Override
@@ -69,10 +90,8 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onNext(GankResult gankResult) {
-                        if (null == gankResult) {
-                            return;
-                        }
+                    public void onComplete() {
+
                     }
                 });
     }

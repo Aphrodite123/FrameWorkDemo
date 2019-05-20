@@ -1,12 +1,15 @@
 package com.aphrodite.demo.model.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * 描述：Gank.io 返回的妹子
  *
  * @author CoderPig on 2018/02/14 10:53.
  */
 
-public class GankMeizi {
+public class BeautyBean implements Parcelable {
     private String _id;
     private String createdAt;
     private String desc;
@@ -15,6 +18,50 @@ public class GankMeizi {
     private String url;
     private Boolean used;
     private String who;
+
+    public BeautyBean() {
+    }
+
+    protected BeautyBean(Parcel in) {
+        _id = in.readString();
+        createdAt = in.readString();
+        desc = in.readString();
+        publishedAt = in.readString();
+        source = in.readString();
+        url = in.readString();
+        byte tmpUsed = in.readByte();
+        used = tmpUsed == 0 ? null : tmpUsed == 1;
+        who = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(_id);
+        dest.writeString(createdAt);
+        dest.writeString(desc);
+        dest.writeString(publishedAt);
+        dest.writeString(source);
+        dest.writeString(url);
+        dest.writeByte((byte) (used == null ? 0 : used ? 1 : 2));
+        dest.writeString(who);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<BeautyBean> CREATOR = new Creator<BeautyBean>() {
+        @Override
+        public BeautyBean createFromParcel(Parcel in) {
+            return new BeautyBean(in);
+        }
+
+        @Override
+        public BeautyBean[] newArray(int size) {
+            return new BeautyBean[size];
+        }
+    };
 
     public String get_id() {
         return _id;

@@ -1,31 +1,10 @@
 package com.aphrodite.demo.model.api;
 
-import com.aphrodite.demo.model.bean.GankResult;
-import com.aphrodite.framework.model.network.api.base.BaseRequest;
+import com.aphrodite.demo.model.network.BeautyResponse;
 
-import java.util.List;
-import java.util.Map;
-
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
-import retrofit2.http.Body;
-import retrofit2.http.DELETE;
-import retrofit2.http.FieldMap;
-import retrofit2.http.FormUrlEncoded;
+import io.reactivex.Observable;
 import retrofit2.http.GET;
-import retrofit2.http.HTTP;
-import retrofit2.http.Headers;
-import retrofit2.http.Multipart;
-import retrofit2.http.POST;
-import retrofit2.http.PUT;
-import retrofit2.http.Part;
-import retrofit2.http.PartMap;
 import retrofit2.http.Path;
-import retrofit2.http.QueryMap;
-import retrofit2.http.Streaming;
-import retrofit2.http.Url;
-import rx.Observable;
 
 /**
  * <p>描述：通用的的api接口</p>
@@ -45,9 +24,9 @@ import rx.Observable;
  * </p>
  * Created by Aphrodite on 2019/4/23.
  */
-public interface RequestApi extends BaseRequest {
+public interface RequestApi {
     @GET("http://gank.io/api/data/福利/{count}/{page}")
-    Observable<GankResult> fetchGankMZ(
+    Observable<BeautyResponse> queryBeauty(
             @Path("count") int count,
             @Path("page") int page
     );
