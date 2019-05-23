@@ -34,7 +34,8 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation dependVersion["junit"]
-    implementation dependVersion["appcompat-v7"]
+    api dependVersion["design"]
+    api dependVersion["appcompat-v7"]
     /**
      * Glide
      */

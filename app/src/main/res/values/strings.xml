@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">FrameWorkDemo</string>
+
+    <!-- 刷新 -->
+    <string name="pull_to_refresh_pull_label">下拉刷新</string>
+    <string name="pull_to_refresh_from_bottom_pull_label">上拉加载</string>
+    <string name="pull_to_refresh_release_label">放开以刷新</string>
+    <string name="pull_to_refresh_refreshing_label1">正在载入</string>
+    <string name="pull_to_refresh_refreshing_label2">正在载入.</string>
+    <string name="pull_to_refresh_refreshing_label3">正在载入..</string>
+    <string name="pull_to_refresh_refreshing_label4">正在载入...</string>
+    <string name="loosen_refresh">松开刷新</string>
+    <string name="load_more">加载更多</string>
+    <string name="no_more">没有更多啦!</string>
+
 </resources>

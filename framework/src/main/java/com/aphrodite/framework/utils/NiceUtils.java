@@ -19,7 +19,7 @@ import java.util.Locale;
  */
 public class NiceUtils {
     /**
-     * Get activity from context object
+     * Get activity from mContext object
      *
      * @param context something
      * @return object of Activity or null if it is not Activity
@@ -35,7 +35,7 @@ public class NiceUtils {
     }
 
     /**
-     * Get AppCompatActivity from context
+     * Get AppCompatActivity from mContext
      *
      * @param context
      * @return AppCompatActivity if it's not null

@@ -18,6 +18,8 @@ public class BeautyBean implements Parcelable {
     private String url;
     private Boolean used;
     private String who;
+    private int width;
+    private int height;
 
     public BeautyBean() {
     }
@@ -32,6 +34,8 @@ public class BeautyBean implements Parcelable {
         byte tmpUsed = in.readByte();
         used = tmpUsed == 0 ? null : tmpUsed == 1;
         who = in.readString();
+        width = in.readInt();
+        height = in.readInt();
     }
 
     @Override
@@ -44,6 +48,8 @@ public class BeautyBean implements Parcelable {
         dest.writeString(url);
         dest.writeByte((byte) (used == null ? 0 : used ? 1 : 2));
         dest.writeString(who);
+        dest.writeInt(width);
+        dest.writeInt(height);
     }
 
     @Override
@@ -125,5 +131,21 @@ public class BeautyBean implements Parcelable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 }

@@ -1,7 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="indicator_right_padding">10dp</dimen>
+    <dimen name="indicator_corner_radius">12dp</dimen>
+    <dimen name="indicator_internal_padding">4dp</dimen>
+    <dimen name="header_footer_left_right_padding">24dp</dimen>
+    <dimen name="header_footer_top_bottom_padding">12dp</dimen>
 
     <!--Toolbar-->
     <dimen name="toolbar_title_height">48dp</dimen>
+
+    <!--Home Activity-->
+    <dimen name="bottom_tab_left_padding">15dp</dimen>
+    <dimen name="bottom_tab_right_padding">15dp</dimen>
+
+    <!--User Home Activity-->
+    <dimen name="ipen_week_ranking_height">297dp</dimen>
+    <dimen name="ipen_proportion_width">159dp</dimen>
+    <dimen name="ipen_proportion_height">159dp</dimen>
+    <dimen name="ipen_founction_icon_width">24dp</dimen>
+    <dimen name="ipen_founction_icon_height">24dp</dimen>
+    <dimen name="ipen_founction_icon_right_margin">6dp</dimen>
+    <dimen name="ipen_founction_left_margin">20dp</dimen>
+    <dimen name="ipen_founction_right_margin">15dp</dimen>
+    <dimen name="ipen_read_evalution_tab_space">50dp</dimen>
+    <dimen name="ipen_read_evalution_tab_bottom_margin">6dp</dimen>
+    <dimen name="ipen_more_right_margin">10dp</dimen>
+    <dimen name="ipen_bar_gragh_left_margin">19dp</dimen>
+    <dimen name="ipen_bar_gragh_right_margin">19dp</dimen>
+    <dimen name="ipen_short_line_width">30dp</dimen>
+    <dimen name="ipen_short_line_bottom_width">26dp</dimen>
+    <dimen name="ipen_short_line_left_margin">5dp</dimen>
+    <dimen name="ipen_short_line_right_margin">5dp</dimen>
+    <dimen name="ipen_sort_page_top_margin">15dp</dimen>
+    <dimen name="ipen_sort_page_left_margin">15dp</dimen>
+    <dimen name="ipen_sort_page_right_margin">15dp</dimen>
+    <dimen name="ipen_sort_page_bottom_margin">35dp</dimen>
+    <dimen name="ipen_circle_head_diameter">24dp</dimen>
+
+    <dimen name="ipen_read_evaluation_item_height">41dp</dimen>
+    <dimen name="ipen_read_evaluation_item_margin">20dp</dimen>
+    <dimen name="read_evaluation_item_top_margin">7dp</dimen>
+    <dimen name="read_evaluation_level_right_margin">9dp</dimen>
+    <dimen name="read_evaluation_level_left_margin">14dp</dimen>
+    <dimen name="read_evaluation_play_right_margin">14dp</dimen>
+
+    <dimen name="read_recently_item_height">86dp</dimen>
+    <dimen name="recently_line_left_margin">5dp</dimen>
+    <dimen name="recently_line_right_margin">5dp</dimen>
+    <dimen name="recently_item_head_width">73dp</dimen>
+    <dimen name="recently_item_head_height">73dp</dimen>
+    <dimen name="recently_item_head_radius">20dp</dimen>
+    <dimen name="recently_item_head_left_margin">15dp</dimen>
+    <dimen name="recently_item_head_right_margin">8dp</dimen>
+    <dimen name="recently_new_icon_left_margin">3dp</dimen>
+
+    <!--IPenFragment-->
+    <dimen name="baby_head_width">36dp</dimen>
+    <dimen name="baby_head_height">36dp</dimen>
+    <dimen name="baby_head_left_margin">14dp</dimen>
+    <dimen name="baby_head_right_margin">14dp</dimen>
+    <dimen name="baby_study_result_top_margin">11dp</dimen>
+    <dimen name="baby_study_result_padding">20dp</dimen>
+    <dimen name="course_title_top_margin">40dp</dimen>
+    <dimen name="course_preview_height">285dp</dimen>
+    <dimen name="course_preview_top_margin">20dp</dimen>
+    <dimen name="course_preview_name_top_margin">5dp</dimen>
+    <dimen name="course_preview_icon_top_margin">14dp</dimen>
+
+    <dimen name="course_preview_icon_bg_width">100dp</dimen>
+    <dimen name="course_preview_icon_bg_height">100dp</dimen>
+
+    <dimen name="course_preview_margin">5dp</dimen>
+    <dimen name="course_preview_lesson_top_margin">15dp</dimen>
+    <dimen name="course_preview_lesson_name_top_margin">12dp</dimen>
+    <dimen name="english_enlightenment_title_top_margin">12dp</dimen>
+    <dimen name="study_result_arrow_right_margin">20dp</dimen>
+    <dimen name="cate_icon_width">90dp</dimen>
+    <dimen name="cate_icon_height">70dp</dimen>
+    <dimen name="cate_icon_left_margin">20dp</dimen>
+    <dimen name="cate_icon_right_margin">28dp</dimen>
+    <dimen name="cate_describe_right_margin">28dp</dimen>
+    <dimen name="cate_content_top_margin">10dp</dimen>
+
+    <dimen name="regard_packet_list_top_margin">20dp</dimen>
+    <dimen name="regard_packet_list_bottom_margin">20dp</dimen>
+    <dimen name="regard_packet_list_item_height">110dp</dimen>
+
+    <!--DiscoveryFragment-->
+    <dimen name="banner_bottom_margin">8dp</dimen>
+    <dimen name="cartoon_books_right_padding">6dp</dimen>
+    <dimen name="cartoon_books_top_margin">17dp</dimen>
+    <dimen name="cartoon_books_left_margin">13dp</dimen>
+    <dimen name="books_new_icon_left_margin">20dp</dimen>
+    <dimen name="cartoon_books_bottom_margin">15dp</dimen>
+    <dimen name="cartoon_books_text_size">13sp</dimen>
+    <dimen name="banner_height">207dp</dimen>
+    <dimen name="read_books_item_height">148dp</dimen>
+    <dimen name="read_books_price_margin_top">15dp</dimen>
+    <dimen name="buy_now_button_width">72dp</dimen>
+    <dimen name="buy_now_button_height">32dp</dimen>
+    <dimen name="buy_now_button_margin_right">10dp</dimen>
+    <dimen name="books_icon_width">120dp</dimen>
+    <dimen name="books_icon_height">120dp</dimen>
+    <dimen name="cartoon_books_item_margin_top">12dp</dimen>
+    <dimen name="cartoon_books_item_margin_bottom">12dp</dimen>
+    <dimen name="books_title_height">72dp</dimen>
+
+    <!--My Fragment-->
+    <dimen name="account_info_botton_margin">27dp</dimen>
+    <dimen name="my_devices_bottom_margin">10dp</dimen>
+    <dimen name="options_item_height">47dp</dimen>
+    <dimen name="options_item_left_margin">20dp</dimen>
+    <dimen name="options_item_right_margin">20dp</dimen>
+    <dimen name="options_item_icon_right_margin">12dp</dimen>
+
+    <!--LearnReportActivity-->
+    <dimen name="calendar_page_width">291dp</dimen>
+    <dimen name="calendar_page_height">260dp</dimen>
+    <dimen name="calendar_page_top_padding">11dp</dimen>
+    <dimen name="calendar_date_left_margin">64dp</dimen>
+    <dimen name="calendar_date_right_margin">64dp</dimen>
+    <dimen name="calendar_week_number_top_margin">15dp</dimen>
+    <dimen name="calendar_divide_line_margin">14dp</dimen>
+    <dimen name="calendar_row_height">31dp</dimen>
+    <dimen name="report_data_view_height">149dp</dimen>
+    <dimen name="learning_perferences_left_margin">21dp</dimen>
+    <dimen name="learning_perferences_text_height">34dp</dimen>
+    <dimen name="share_button_width">140dp</dimen>
+    <dimen name="share_button_height">40dp</dimen>
+    <dimen name="share_button_top_margin">18dp</dimen>
+    <dimen name="share_button_bottom_margin">50dp</dimen>
+    <dimen name="share_button_icon_right_margin">10dp</dimen>
+    <dimen name="read_difficulty_list_height">286dp</dimen>
+
+    <!--SortPageActivity-->
+    <dimen name="sort_page_prompt_height">38dp</dimen>
+    <dimen name="sort_page_prompt_left_margin">20dp</dimen>
+    <dimen name="sort_page_item_height">50dp</dimen>
+    <dimen name="sort_page_item_title_left_margin">17dp</dimen>
+
+    <!--DeviceDetailActivity-->
+    <dimen name="baby_detail_head_height">91dp</dimen>
+
+    <!--ReadEvaluationActivity-->
+    <dimen name="standard_number_margin_top">25dp</dimen>
+    <dimen name="learn_time_indicator_point_width">8dp</dimen>
+    <dimen name="learn_time_indicator_point_height">8dp</dimen>
+    <dimen name="learn_time_indicator_point_space">12dp</dimen>
+    <dimen name="learn_time_indicator_point_margin_top">15dp</dimen>
+    <dimen name="learn_time_indicator_point_margin_bottom">15dp</dimen>
+    <dimen name="review_curve_chart_height">300dp</dimen>
+    <dimen name="dotted_line_width">0.5dp</dimen>
+    <dimen name="dotted_line_height">0.5dp</dimen>
+    <dimen name="review_curve_chart_margin_top">50dp</dimen>
+    <dimen name="review_curve_chart_margin_bottom">25dp</dimen>
+
+    <!--ReadHistoryActivity-->
+    <dimen name="read_history_detail_bar_gragh_height">348dp</dimen>
+    <dimen name="read_history_detail_times_margin_top">42dp</dimen>
+    <dimen name="read_history_detail_times_margin_bottom">20dp</dimen>
+
+    <!--LearnTimeActivity-->
+    <dimen name="learn_time_detail_cycle_height">308dp</dimen>
+    <dimen name="learn_time_detail_tab_margin_bottom">31dp</dimen>
+    <dimen name="line_chart_height">280dp</dimen>
+    <dimen name="line_chart_date_height">25dp</dimen>
+
+    <!--CardDetailActivity-->
+    <dimen name="card_describe_bg_height">120dp</dimen>
+    <dimen name="card_describe_height">185dp</dimen>
+    <dimen name="card_play_types_padding_top">110dp</dimen>
+    <dimen name="card_play_types_padding_bottom">10dp</dimen>
+    <dimen name="card_play_types_text_margin_bottom">8dp</dimen>
+    <dimen name="card_play_types_icon_padding">6dp</dimen>
+    <dimen name="card_play_types_line_padding">10dp</dimen>
+    <dimen name="suitable_age_margin_top">10dp</dimen>
+    <dimen name="ability_learn_margin_top">8dp</dimen>
+    <dimen name="card_describe_margin_top">10dp</dimen>
+
+    <!--ReadHistoryFragment-->
+    <dimen name="read_history_prompt_margin_top">15dp</dimen>
+    <dimen name="read_history_prompt_margin_bottom">20dp</dimen>
+    <dimen name="history_item_icon_margin_left">25dp</dimen>
+    <dimen name="history_item_time_margin_left">8dp</dimen>
+    <dimen name="progressbar_height">47dp</dimen>
+    <dimen name="progressbar_margin_top">9dp</dimen>
+    <dimen name="progressbar_margin_left">16dp</dimen>
+    <dimen name="progressbar_margin_right">25dp</dimen>
+
+    <!--GameRecordsFragment-->
+    <dimen name="game_records_margin_top">26dp</dimen>
+    <dimen name="game_record_content_height">44dp</dimen>
+    <dimen name="game_record_content_margin_left">20dp</dimen>
+    <dimen name="game_record_content_margin_right">20dp</dimen>
+    <dimen name="game_record_content_padding">20dp</dimen>
+    <dimen name="game_record_time_height">26dp</dimen>
+
+    <!--GuideResetDeviceActivity-->
+    <dimen name="guide_reset_device_prompt_padding">10dp</dimen>
+
+    <!--NotifyMessageActivity-->
+    <dimen name="notify_message_item_height">78dp</dimen>
+
+    <!--ScoreActivity-->
+    <dimen name="prompt_margin_top">8dp</dimen>
+    <dimen name="prompt_margin_bottom">17dp</dimen>
+    <dimen name="prompt_preview_margin_bottom">8dp</dimen>
+
+    <!--RegardPacketContentActivity-->
+    <dimen name="regard_packet_content_top_margin">35dp</dimen>
+    <dimen name="regard_packet_content_bottom_margin">35dp</dimen>
+    <dimen name="packet_icon_width">215dp</dimen>
+    <dimen name="packet_icon_height">235dp</dimen>
+    <dimen name="packet_name_width">235dp</dimen>
+    <dimen name="packet_name_height">75dp</dimen>
+    <dimen name="packet_name_top_margin">45dp</dimen>
+    <dimen name="regard_packet_content_number_bottom_margin">38dp</dimen>
+    <dimen name="packet_card_word_height">45dp</dimen>
+    <dimen name="packet_text_word_height">155dp</dimen>
+    <dimen name="packet_word_top_margin">10dp</dimen>
+    <dimen name="packet_word_left_margin">24dp</dimen>
+    <dimen name="packet_word_right_margin">24dp</dimen>
+    <dimen name="packet_word_bottom_margin">10dp</dimen>
+    <dimen name="packet_sentence_top_margin">16dp</dimen>
+
+    <!--Pull to refresh recyclerview-->
+    <dimen name="pull_to_refresh_header_height">120dp</dimen>
+    <dimen name="pull_to_refresh_footer_height">48dp</dimen>
+
+    <!--Dialog bind device-->
+    <dimen name="video_player_height">189dp</dimen>
+    <dimen name="video_player_left_margin">15dp</dimen>
+    <dimen name="video_player_right_margin">15dp</dimen>
+    <dimen name="dialog_bind_device_width">250dp</dimen>
+    <dimen name="dialog_bind_device_height">45dp</dimen>
+
+    <!--Course detail activity-->
+    <dimen name="course_detail_item_height">150dp</dimen>
+    <dimen name="course_describe_margin">10dp</dimen>
+
+    <!--Course Player Activity-->
+    <dimen name="course_player_back_width">48dp</dimen>
+    <dimen name="course_player_back_height">48dp</dimen>
+    <dimen name="course_player_back_left_margin">34dp</dimen>
+    <dimen name="course_player_back_top_margin">14dp</dimen>
+    <dimen name="course_info_height">68dp</dimen>
+    <dimen name="course_info_left_padding">34dp</dimen>
+    <dimen name="course_info_right_padding">34dp</dimen>
+    <dimen name="course_play_right_margin">20dp</dimen>
+    <dimen name="course_language_right_margin">25dp</dimen>
+    <dimen name="course_play_model_left_margin">20dp</dimen>
+    <dimen name="read_complete_cover_width">122dp</dimen>
+    <dimen name="read_complete_cover_height">128dp</dimen>
+
+    <dimen name="video_album_icon_height">200dp</dimen>
 
 </resources>

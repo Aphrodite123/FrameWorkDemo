@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_item_root"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/ipen_short_line_width"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <View style="@style/divide_line_short" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/ipen_short_line_left_margin"
+        android:layout_marginRight="@dimen/ipen_short_line_right_margin"
+        android:text="@string/no_more"
+        android:textColor="@color/color_66000000"
+        android:textSize="@dimen/font10" />
+
+    <View style="@style/divide_line_short" />
+
+</LinearLayout>

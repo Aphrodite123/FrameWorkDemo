@@ -20,7 +20,7 @@
         android:theme="@style/custom_base_app_theme">
 
         <!--activity start-->
-        <activity android:name=".model.view.MainActivity">
+        <activity android:name=".view.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

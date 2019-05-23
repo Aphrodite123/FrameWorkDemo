@@ -75,6 +75,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        dismissLoadingDialog();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         if (null != mUnbinder) {

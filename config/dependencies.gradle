@@ -6,7 +6,7 @@ def rxAndroidVersion = "2.0.1"
 def okhttpVersion = "3.9.1"
 def okhttpOkioVersion = "1.9.0"
 def retrofitVersion = "2.5.0"
-def glideVersion = "4.6.1"
+def glideVersion = "3.8.0"
 
 project.ext {
     android = [

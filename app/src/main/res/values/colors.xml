@@ -1,6 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--透明度90% ：E6-->
+    <!--透明度80%： CC-->
+    <!--透明度70%： B3-->
+    <!--透明度60%： 99-->
+    <!--半透明50%： 80-->
+    <!--透明度40%： 66-->
+    <!--透明度30%： 4D-->
+    <!--透明度20%： 33-->
+    <!--透明度10%： 1A-->
+
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!--男宝宝主题色-->
+    <color name="color_2fcddf">#2FCDDF</color>
+    <!--学习偏好饼状图二级颜色-男宝宝-->
+    <color name="color_59d7e5">#59D7E5</color>
+    <!--学习偏好饼状图三级颜色-男宝宝-->
+    <color name="color_82e1ec">#82E1EC</color>
+    <!--学习偏好饼状图四级颜色-男宝宝-->
+    <color name="color_acebf2">#ACEBF2</color>
+    <!--学习偏好饼状图五级颜色-男宝宝-->
+    <color name="color_d5f5f9">#D5F5F9</color>
+    <!--高亮时颜色-->
+    <color name="color_3fbbcc">#3FBBCC</color>
+
+    <!--男宝宝主题色4%透明度-->
+    <color name="color_0a2fcddf">#0A2FCDDF</color>
+    <!--男宝宝主题色20%透明度-->
+    <color name="color_302fcddf">#302FCDDF</color>
+    <!--男宝宝主题色40%透明度-->
+    <color name="color_602fcddf">#602FCDDF</color>
+    <!--男宝宝主题色60%透明度-->
+    <color name="color_a02fcddf">#A02FCDDF</color>
+    <!--男宝宝主题色80%透明度-->
+    <color name="color_cc2fcddf">#CC2FCDDF</color>
+
+
+    <!--女宝宝主题色-->
+    <color name="color_fd7879">#FD7879</color>
+    <!--学习偏好饼状图二级颜色-女宝宝-->
+    <color name="color_fd9394">#FD9394</color>
+    <!--学习偏好饼状图三级颜色-女宝宝-->
+    <color name="color_feaeaf">#FEAEAF</color>
+    <!--学习偏好饼状图四级颜色-女宝宝-->
+    <color name="color_fec9c9">#FEC9C9</color>
+    <!--学习偏好饼状图五级颜色-女宝宝-->
+    <color name="color_ffe4e4">#FFE4E4</color>
+    <!--高亮时颜色-->
+    <color name="color_ec7574">#EC7574</color>
+
+    <!--女宝宝主题色4%透明度-->
+    <color name="color_0afd7879">#0AFD7879</color>
+    <!--女宝宝主题色20%透明度-->
+    <color name="color_30fd7879">#30FD7879</color>
+    <!--女宝宝主题色40%透明度-->
+    <color name="color_60fd7879">#60FD7879</color>
+    <!--女宝宝主题色60%透明度-->
+    <color name="color_a0fd7879">#A0FD7879</color>
+    <!--女宝宝主题色80%透明度-->
+    <color name="color_ccfd7879">#CCFD7879</color>
+
+    <color name="color_04000000">#04000000</color>
+    <color name="color_08000000">#08000000</color>
+    <color name="color_0a000000">#0A000000</color>
+    <color name="color_0f000000">#0F000000</color>
+    <color name="color_10000000">#10000000</color>
+    <color name="color_14000000">#14000000</color>
+    <color name="color_4d000000">#4d000000</color>
+    <color name="color_66000000">#66000000</color>
+    <color name="color_80000000">#80000000</color>
+    <color name="color_8a000000">#8A000000</color>
+    <color name="color_99000000">#99000000</color>
+    <color name="color_99dcdcdc">#99DCDCDC</color>
+    <color name="color_a0000000">#A0000000</color>
+    <color name="color_b3000000">#B3000000</color>
+    <color name="color_bc000000">#BC000000</color>
+    <color name="color_cc000000">#CC000000</color>
+    <color name="color_e6000000">#E6000000</color>
+    <color name="color_e6202020">#E6202020</color>
+    <color name="color_e6212121">#E6212121</color>
+    <color name="color_e6959595">#E6959595</color>
+    <color name="color_e6f24100">#E6F24100</color>
+    <color name="color_eb000000">#EB000000</color>
+    <color name="color_f2000000">#F2000000</color>
+
+    <color name="color_14ffffff">#14FFFFFF</color>
+    <!--20% 透明度-->
+    <color name="color_33ffffff">#33FFFFFF</color>
+    <color name="color_99ffffff">#99FFFFFF</color>
+    <color name="color_b3ffffff">#B3FFFFFF</color>
+    <!--80% 透明度-->
+    <color name="color_ccffffff">#CCFFFFFF</color>
+    <color name="color_e6ffffff">#E6FFFFFF</color>
+
+
+    <color name="color_00b491">#00B491</color>
+    <color name="color_202020">#202020</color>
+    <color name="color_212121">#212121</color>
+    <color name="color_27ace7">#27ACE7</color>
+    <color name="color_5dd2ff">#5DD2FF</color>
+    <color name="color_5fdabe">#5FDABE</color>
+    <color name="color_626262">#626262</color>
+    <color name="color_84d5e3">#84d5e3</color>
+    <color name="color_a0e5ff">#a0e5ff</color>
+    <color name="color_ae975d">#ae975d</color>
+    <color name="color_cacbcc">#CACBCC</color>
+    <color name="color_cccccc">#CCCCCC</color>
+    <color name="color_d9d9d9">#D9D9D9</color>
+    <color name="color_e6f7f9">#E6F7F9</color>
+    <color name="color_edeff0">#EDEFF0</color>
+    <color name="color_f2f2f2">#F2F2F2</color>
+    <color name="color_f3f3f3">#F3F3F3</color>
+    <color name="color_f3f4f6">#F3F4F6</color>
+    <color name="color_f75f5d">#F75F5D</color>
+    <color name="color_f7f7f7">#F7F7F7</color>
+    <color name="color_fac264">#FAC264</color>
+    <color name="color_ff699a">#FF699A</color>
+    <color name="color_ff7592">#FF7592</color>
+    <!--卡片内容画廊颜色&#45;&#45;字母卡-->
+    <color name="color_ffa1b5">#FFA1B5</color>
+    <color name="color_ffde38">#FFDE38</color>
+    <!--字母卡背景色-->
+    <color name="color_ffedf1">#FFEDF1</color>
+
 </resources>

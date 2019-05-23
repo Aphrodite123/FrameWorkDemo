@@ -1,19 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <include layout="@layout/toolbar_general" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_2fcddf"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/welcome_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="5dp"
-        android:text="欢迎"
-        android:textSize="13sp" />
+        <include layout="@layout/toolbar_general" />
 
-</LinearLayout>
+        <com.aphrodite.demo.view.widget.recycleview.PullToRefreshRecyclerView
+            android:id="@+id/beauty_list_irv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            app:loadMoreEnabled="true"
+            app:loadMoreFooterLayout="@layout/layout_rv_footer_container"
+            app:refreshEnabled="true"
+            app:refreshHeaderLayout="@layout/layout_rv_header_container" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@android:color/white"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="@android:color/white"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+</android.support.v4.widget.DrawerLayout>
