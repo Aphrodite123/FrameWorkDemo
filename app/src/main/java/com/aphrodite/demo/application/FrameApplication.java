@@ -8,6 +8,8 @@ import android.os.Bundle;
 import com.aphrodite.demo.BuildConfig;
 import com.aphrodite.demo.application.base.BaseApplication;
 import com.aphrodite.demo.config.HttpConfig;
+import com.aphrodite.demo.model.database.migration.GlobalRealmMigration;
+import com.aphrodite.demo.utils.LogUtils;
 import com.aphrodite.framework.model.network.api.RetrofitInitial;
 import com.aphrodite.framework.model.network.interceptor.BaseHeaderInterceptor;
 import com.aphrodite.framework.model.network.interceptor.BaseResponseInterceptor;
@@ -16,15 +18,24 @@ import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.concurrent.TimeUnit;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.exceptions.RealmMigrationNeededException;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.aphrodite.demo.config.RuntimeConfig.DATABASE_NAME;
+import static com.aphrodite.demo.config.RuntimeConfig.DATABASE_VERSION;
 
 /**
  * Created by Aphrodite on 2018/7/26.
@@ -35,6 +46,8 @@ public class FrameApplication extends BaseApplication {
     private int mActivityCount;
 
     private static RetrofitInitial mRetrofitInitial;
+
+    private RealmConfiguration mRealmConfiguration;
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -47,6 +60,10 @@ public class FrameApplication extends BaseApplication {
 
         registerActivityLifecycleCallbacks(lifecycleCallbacks);
 
+        Logger.addLogAdapter(new AndroidLogAdapter());
+
+        initRealm();
+
         initHttp();
     }
 
@@ -57,6 +74,11 @@ public class FrameApplication extends BaseApplication {
 
     public static FrameApplication getApplication() {
         return mIpenApplication;
+    }
+
+    private void initRealm() {
+        Realm.init(this);
+        createGlobalRealm();
     }
 
     private void initHttp() {
@@ -95,6 +117,38 @@ public class FrameApplication extends BaseApplication {
 
     public static RetrofitInitial getRetrofitInit() {
         return mRetrofitInitial;
+    }
+
+    private void createGlobalRealm() {
+        mRealmConfiguration = new RealmConfiguration.Builder()
+                .name(DATABASE_NAME)
+                .schemaVersion(DATABASE_VERSION)
+                //开发阶段，删除旧版本数据
+//                .deleteRealmIfMigrationNeeded()
+                .migration(new GlobalRealmMigration())
+                .build();
+        Realm.setDefaultConfiguration(mRealmConfiguration);
+    }
+
+    public Realm getGlobalRealm() throws FileNotFoundException {
+        Realm realm;
+        if (null == mRealmConfiguration) {
+            mRealmConfiguration = new RealmConfiguration.Builder()
+                    .name(DATABASE_NAME)
+                    .schemaVersion(DATABASE_VERSION)
+                    .migration(new GlobalRealmMigration())
+                    .build();
+        }
+
+        try {
+            realm = Realm.getInstance(mRealmConfiguration);
+        } catch (RealmMigrationNeededException e) {
+            LogUtils.e("Enter getGlobalRealm method.RealmMigrationNeededException: " + e);
+            Realm.migrateRealm(mRealmConfiguration, new GlobalRealmMigration());
+            realm = Realm.getInstance(mRealmConfiguration);
+        }
+
+        return realm;
     }
 
     private Application.ActivityLifecycleCallbacks lifecycleCallbacks = new Application.ActivityLifecycleCallbacks() {

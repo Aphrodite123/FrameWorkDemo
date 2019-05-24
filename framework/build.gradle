@@ -17,7 +17,8 @@ publish {
 }
 
 android {
-    compileSdkVersion 27
+
+    compileSdkVersion dependAndroid["compileSdkVersion"]
     defaultConfig {
         buildToolsVersion dependAndroid["buildToolsVersion"]
         minSdkVersion dependAndroid["minSdkVersion"]

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 27
@@ -39,7 +40,7 @@ android {
             //是否输出日志
             buildConfigField 'boolean', 'IS_DEBUG', 'true'
             //服务器地址
-            buildConfigField 'String', 'SERVER_URL', '"http://gank.io/api/data/福利/"'
+            buildConfigField 'String', 'SERVER_URL', '"https://www.dbmeinv.com/"'
         }
         release {
             minifyEnabled true
@@ -50,7 +51,7 @@ android {
             //是否输出日志
             buildConfigField 'boolean', 'IS_DEBUG', 'false'
             //服务器地址
-            buildConfigField 'String', 'SERVER_URL', '"http://gank.io/api/data/福利/"'
+            buildConfigField 'String', 'SERVER_URL', '"https://www.dbmeinv.com/"'
             debuggable false
         }
     }
@@ -63,14 +64,20 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation project(':framework')
-
+    /**
+     * Log
+     */
+    implementation 'com.orhanobut:logger:2.2.0'
     /**
      * 注解框架
      */
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-
     implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
-
     implementation 'com.jakewharton.rxbinding:rxbinding:0.4.0'
+    /**
+     * Stetho调试 Realm
+     */
+    implementation 'com.facebook.stetho:stetho:1.5.0'
+    implementation 'com.uphyca:stetho_realm:2.2.2'
 }
