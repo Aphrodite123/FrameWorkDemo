@@ -20,13 +20,27 @@
         android:theme="@style/custom_base_app_theme">
 
         <!--activity start-->
-        <activity android:name=".view.activity.MainActivity">
+        <activity
+            android:name=".view.activity.MainActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".view.activity.BeautyDetailsActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="com.jiqid.ipen.view.BEAUTYDETAILS" />
+            </intent-filter>
+        </activity>
+
         <!--activity end-->
     </application>
 

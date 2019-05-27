@@ -1,6 +1,7 @@
 package com.aphrodite.demo.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.aphrodite.demo.R;
+import com.aphrodite.demo.config.IntentAction;
 import com.aphrodite.demo.model.bean.BeautyBean;
 import com.aphrodite.demo.view.widget.imageview.ScaleImageView;
 import com.aphrodite.framework.view.adapter.BaseRecyclerAdapter;
@@ -37,7 +39,7 @@ public class BeautyListAdapter<T> extends BaseRecyclerAdapter<T, BeautyListAdapt
 
     @Override
     public void onBindViewHolder(BeautyListAdapter.ViewHolder holder, int position) {
-        BeautyBean bean = (BeautyBean) getItem(position);
+        final BeautyBean bean = (BeautyBean) getItem(position);
         if (null == bean) {
             return;
         }
@@ -51,6 +53,16 @@ public class BeautyListAdapter<T> extends BaseRecyclerAdapter<T, BeautyListAdapt
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .dontAnimate()
                 .into(holder.mItemIV);
+
+        holder.mItemIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(IntentAction.BeautyDetailsAction.ACTION);
+                intent.putExtra(IntentAction.BeautyDetailsAction.ID, bean.get_id());
+                intent.putExtra(IntentAction.BeautyDetailsAction.URL, bean.getUrl());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
