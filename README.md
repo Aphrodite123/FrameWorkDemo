@@ -23,6 +23,8 @@ dependencies {
 ```
 
 ## Features
+- Use MVP architecture for most developers.
+- At the same time the use of singletons, builder and other Java design patterns.
 
 ## Usage
 
