@@ -5,7 +5,7 @@ Help developers quickly build a simple project framework.
 
 Add this in your root `build.gradle` file (not your module `build.gradle` file):
 
-```
+```gradle
 allprojects {  
         repositories {  
              mavenLocal()  
@@ -16,7 +16,7 @@ allprojects {
 
 Then, add the library to your module `build.gradle`
 
-```
+```gradle
 dependencies {  
     implementation 'com.aphrodite.framework:framework-base:1.0.1'
 }
