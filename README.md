@@ -1,6 +1,8 @@
 # FrameWorkDemo
 Help developers quickly build a simple project framework.
 
+[![](https://bintray.com/beta/#/aphrodite/maven/framework-base?tab=overview)
+
 # Dependency
 
 Add this in your root build.gradle file (not your module build.gradle file):
@@ -16,9 +18,11 @@ allprojects {
 
 Then, add the library to your module build.gradle
 
-dependencies {
+```
+dependencies {  
     implementation 'com.aphrodite.framework:framework-base:1.0.1'
 }
+```
 
 # Features
 
