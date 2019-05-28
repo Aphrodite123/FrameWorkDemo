@@ -1,41 +1,42 @@
 # FrameWorkDemo
-Android base frame
+Help developers quickly build a simple project framework.
 
-<dependency>
-	<groupId>com.aphrodite.framework</groupId>
-	<artifactId>framework-base</artifactId>
-	<version>1.0.1</version>
-	<type>pom</type>
-</dependency>
+Dependency
 
-compile 'com.aphrodite.framework:framework-base:1.0.1'
+Add this in your root build.gradle file (not your module build.gradle file):
 
+allprojects {
+	repositories {
+	    mavenLocal()
+        maven { url "https://jitpack.io" }
+    }
+}
 
-分页：
+Then, add the library to your module build.gradle
 
-https://www.dbmeinv.com/index.htm
+dependencies {
+    implementation 'com.aphrodite.framework:framework-base:1.0.1'
+}
 
-https://www.dbmeinv.com/index.htm?pager_offset=2
+Features
 
+Usage
 
-大胸妹：
-https://www.dbmeinv.com/index.htm?cid=2
-https://www.dbmeinv.com/index.htm?cid=2&pager_offset=2
+Usage with Fresco
 
-小翘臀：
-https://www.dbmeinv.com/index.htm?cid=6
-https://www.dbmeinv.com/index.htm?cid=6&pager_offset=2
+Subsampling Support
 
+License
+Copyright 2018 Chris Banes
 
-黑丝：
-https://www.dbmeinv.com/index.htm?cid=7
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-美腿控：
-https://www.dbmeinv.com/index.htm?cid=3
+   http://www.apache.org/licenses/LICENSE-2.0
 
-有颜值：
-https://www.dbmeinv.com/index.htm?cid=4
-
-
-大杂烩：
-https://www.dbmeinv.com/index.htm?cid=5
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
