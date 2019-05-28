@@ -1,7 +1,7 @@
 # FrameWorkDemo
 Help developers quickly build a simple project framework.
 
-Dependency
+# Dependency
 
 Add this in your root build.gradle file (not your module build.gradle file):
 
@@ -18,15 +18,15 @@ dependencies {
     implementation 'com.aphrodite.framework:framework-base:1.0.1'
 }
 
-Features
+# Features
 
-Usage
+# Usage
 
-Usage with Fresco
+# Usage with Fresco
 
-Subsampling Support
+# Subsampling Support
 
-License
+# License
 Copyright 2018 Chris Banes
 
 Licensed under the Apache License, Version 2.0 (the "License");
