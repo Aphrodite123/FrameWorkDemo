@@ -5,7 +5,7 @@ Help developers quickly build a simple project framework.
 
 Add this in your root build.gradle file (not your module build.gradle file):
 
-allprojects {
+allprojects {	
 	repositories {
 		mavenLocal()
 		maven { url "https://jitpack.io" }
