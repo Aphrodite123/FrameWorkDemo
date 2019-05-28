@@ -1,15 +1,14 @@
 # FrameWorkDemo
 Help developers quickly build a simple project framework.
-***
 
 # Dependency
 
 Add this in your root build.gradle file (not your module build.gradle file):
 
-allprojects {	
-	>repositories {
-		>>mavenLocal()
-		>>maven { url "https://jitpack.io" }
+allprojects {  
+	repositories {  
+		mavenLocal()  
+		maven { url "https://jitpack.io" }  
     }
 }
 
