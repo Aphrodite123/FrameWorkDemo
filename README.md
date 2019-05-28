@@ -16,9 +16,11 @@ allprojects {
 
 Then, add the library to your module build.gradle
 
-dependencies {
+```
+dependencies {  
     implementation 'com.aphrodite.framework:framework-base:1.0.1'
 }
+```
 
 # Features
 
