@@ -13,4 +13,7 @@
     <string name="load_more">加载更多</string>
     <string name="no_more">没有更多啦!</string>
 
+    <!--MainActivity-->
+    <string name="beauty_title">美女推荐</string>
+
 </resources>

@@ -1,18 +1,21 @@
-package com.aphrodite.demo.model.bean;
+package com.aphrodite.demo.model.database.dao;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.aphrodite.demo.model.database.dao.BeautyDao;
+import com.aphrodite.demo.model.bean.BeautyBean;
+
+import io.realm.RealmModel;
+import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.RealmClass;
 
 /**
- * 描述：Gank.io 返回的妹子
- *
- * @author CoderPig on 2018/02/14 10:53.
+ * Created by Aphrodite on 2019/5/28.
  */
-
-public class BeautyBean implements Parcelable {
-    private String _id;
+@RealmClass
+public class BeautyDao implements Parcelable, RealmModel {
+    @PrimaryKey
+    private String id;
     private String createdAt;
     private String desc;
     private String publishedAt;
@@ -23,11 +26,11 @@ public class BeautyBean implements Parcelable {
     private int width;
     private int height;
 
-    public BeautyBean() {
+    public BeautyDao() {
     }
 
-    protected BeautyBean(Parcel in) {
-        _id = in.readString();
+    protected BeautyDao(Parcel in) {
+        id = in.readString();
         createdAt = in.readString();
         desc = in.readString();
         publishedAt = in.readString();
@@ -42,7 +45,7 @@ public class BeautyBean implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(_id);
+        dest.writeString(id);
         dest.writeString(createdAt);
         dest.writeString(desc);
         dest.writeString(publishedAt);
@@ -59,24 +62,24 @@ public class BeautyBean implements Parcelable {
         return 0;
     }
 
-    public static final Creator<BeautyBean> CREATOR = new Creator<BeautyBean>() {
+    public static final Creator<BeautyDao> CREATOR = new Creator<BeautyDao>() {
         @Override
-        public BeautyBean createFromParcel(Parcel in) {
-            return new BeautyBean(in);
+        public BeautyDao createFromParcel(Parcel in) {
+            return new BeautyDao(in);
         }
 
         @Override
-        public BeautyBean[] newArray(int size) {
-            return new BeautyBean[size];
+        public BeautyDao[] newArray(int size) {
+            return new BeautyDao[size];
         }
     };
 
-    public String get_id() {
-        return _id;
+    public String getId() {
+        return id;
     }
 
-    public void set_id(String _id) {
-        this._id = _id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getCreatedAt() {
@@ -111,6 +114,14 @@ public class BeautyBean implements Parcelable {
         this.source = source;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public Boolean getUsed() {
         return used;
     }
@@ -125,14 +136,6 @@ public class BeautyBean implements Parcelable {
 
     public void setWho(String who) {
         this.who = who;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public int getWidth() {
@@ -151,20 +154,20 @@ public class BeautyBean implements Parcelable {
         this.height = height;
     }
 
-    public void copy(BeautyDao dao) {
-        if (null == dao) {
+    public void copy(BeautyBean bean) {
+        if (null == bean) {
             return;
         }
 
-        set_id(dao.getId());
-        setCreatedAt(dao.getCreatedAt());
-        setDesc(dao.getDesc());
-        setPublishedAt(dao.getPublishedAt());
-        setSource(dao.getSource());
-        setUrl(dao.getUrl());
-        setUsed(dao.getUsed());
-        setWho(dao.getWho());
-        setWidth(dao.getWidth());
-        setHeight(dao.getHeight());
+        setId(bean.get_id());
+        setCreatedAt(bean.getCreatedAt());
+        setDesc(bean.getDesc());
+        setPublishedAt(bean.getPublishedAt());
+        setSource(bean.getSource());
+        setUrl(bean.getUrl());
+        setUsed(bean.getUsed());
+        setWho(bean.getWho());
+        setWidth(bean.getWidth());
+        setHeight(bean.getHeight());
     }
 }

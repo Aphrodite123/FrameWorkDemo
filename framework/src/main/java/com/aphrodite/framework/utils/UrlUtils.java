@@ -1,5 +1,7 @@
 package com.aphrodite.framework.utils;
 
+import android.util.Patterns;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -122,4 +124,21 @@ public class UrlUtils {
             return url;
         }
     }
+
+    /**
+     * 检查url的合法性
+     *
+     * @param url
+     * @return
+     */
+    public static boolean checkUrl(String url) {
+        if (Patterns.WEB_URL.matcher(url).matches()) {
+            //符合标准url
+            return true;
+        } else {
+            //不符合标准
+            return false;
+        }
+    }
+
 }

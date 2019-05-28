@@ -267,4 +267,186 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 设置右边按钮图片
+     *
+     * @param resId 图片ID
+     */
+    public void setLeftBtnRes(int resId) {
+        if (mLeftBtn != null) {
+            mLeftBtn.setImageResource(resId);
+        }
+    }
+
+    /**
+     * 设置左边按钮文字
+     */
+    protected void setLeftText(int textId) {
+        if (mLeftText != null)
+            mLeftText.setText(textId);
+    }
+
+    /**
+     * 设置左边按钮文字
+     */
+    protected void setLeftText(String text) {
+        if (mLeftText != null)
+            mLeftText.setText(text);
+    }
+
+    /**
+     * 设置日期
+     *
+     * @param text
+     */
+    protected void setDateText(String text) {
+        if (null == mDateText) {
+            return;
+        }
+
+        if (ObjectUtils.isEmpty(text)) {
+            mDateText.setVisibility(View.GONE);
+            return;
+        }
+
+        mDateText.setText(text);
+        mDateText.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * 设置日期
+     *
+     * @param textId
+     */
+    protected void setDateText(int textId) {
+        if (ObjectUtils.isEmpty(textId)) {
+            if (mDateText != null) {
+                mDateText.setVisibility(View.GONE);
+            }
+            return;
+        }
+
+        if (mDateText != null) {
+            mDateText.setText(textId);
+            mDateText.setVisibility(View.VISIBLE);
+        }
+    }
+
+    /**
+     * 设置右边按钮文字
+     */
+    protected void setRightText(int textId) {
+        if (mRightText != null)
+            mRightText.setText(textId);
+    }
+
+    /**
+     * 设置右边按钮文字
+     */
+    protected void setRightText(String text) {
+        if (mRightText != null)
+            mRightText.setText(text);
+    }
+
+    /**
+     * 设置标题栏文字
+     *
+     * @param textId 文字id
+     */
+    public void setTitleText(int textId) {
+        if (mCenterText != null)
+            mCenterText.setText(textId);
+    }
+
+    /**
+     * 设置标题栏文字
+     *
+     * @param text 文字内容
+     */
+    public void setTitleText(String text) {
+        if (mCenterText != null)
+            mCenterText.setText(text);
+    }
+
+    /**
+     * 设置标题字体颜色
+     *
+     * @param color
+     */
+    public void setTitleColor(int color) {
+        if (mCenterText != null) {
+            mCenterText.setTextColor(color);
+        }
+    }
+
+    /**
+     * 设置右边按钮图片
+     *
+     * @param resId 图片ID
+     */
+    public void setRightBtnRes(int resId) {
+        if (mRightBtn != null)
+            mRightBtn.setImageResource(resId);
+    }
+
+    /**
+     * 设置右边第二个按钮图片
+     *
+     * @param resId
+     */
+    public void setSecondRightRes(int resId) {
+        if (mSecondRightBtn != null) {
+            mSecondRightBtn.setImageResource(resId);
+        }
+    }
+
+    /**
+     * 默认返回按钮响应事件
+     *
+     * @param view
+     */
+    public void clickBack(View view) {
+        finish();
+    }
+
+    /**
+     * 默认左边文字按钮响应事件
+     *
+     * @param view
+     */
+    public void clickLeftText(View view) {
+    }
+
+    /**
+     * 关闭页面
+     *
+     * @param view
+     */
+    public void closePageEvent(View view) {
+    }
+
+    /**
+     * 默认右边图片按钮响应事件
+     *
+     * @param view
+     */
+    public void clickRightBtn(View view) {
+    }
+
+    /**
+     * 右边第二个按钮点击事件
+     *
+     * @param view
+     */
+    public void onRightSecond(View view) {
+    }
+
+    /**
+     * 默认右边文字按钮响应事件
+     *
+     * @param view
+     */
+    public void clickRightText(View view) {
+    }
+
 }

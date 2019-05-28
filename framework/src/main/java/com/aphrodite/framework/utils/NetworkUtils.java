@@ -29,8 +29,11 @@ public class NetworkUtils {
      * false:无法连接网络
      */
     public static boolean isNetworkAvailable(Context context) {
-        ConnectivityManager connMgr = (ConnectivityManager) context
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (null == context) {
+            return false;
+        }
+
+        ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
             return true;

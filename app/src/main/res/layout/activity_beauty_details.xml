@@ -20,7 +20,6 @@
             android:id="@+id/beauty_details_index"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1"
             android:textColor="@android:color/white"
             android:textStyle="bold" />
 
@@ -28,7 +27,6 @@
             android:id="@+id/beauty_details_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="/10"
             android:textColor="@color/color_99ffffff" />
 
     </LinearLayout>

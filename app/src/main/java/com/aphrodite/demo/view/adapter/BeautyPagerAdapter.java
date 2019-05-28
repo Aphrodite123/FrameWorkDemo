@@ -46,7 +46,7 @@ public class BeautyPagerAdapter<T> extends BasePagerAdapter {
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        container.removeView(container.getChildAt(position));
+//        container.removeView(container.getChildAt(position));
     }
 
     private void initView(View view, int position) {

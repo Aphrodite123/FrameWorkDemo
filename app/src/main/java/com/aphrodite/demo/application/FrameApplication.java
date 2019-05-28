@@ -14,12 +14,14 @@ import com.aphrodite.framework.model.network.api.RetrofitInitial;
 import com.aphrodite.framework.model.network.interceptor.BaseHeaderInterceptor;
 import com.aphrodite.framework.model.network.interceptor.BaseResponseInterceptor;
 import com.aphrodite.framework.utils.PathUtils;
+import com.facebook.stetho.Stetho;
 import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
+import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -65,6 +67,8 @@ public class FrameApplication extends BaseApplication {
         initRealm();
 
         initHttp();
+
+        initStetho();
     }
 
     @Override
@@ -149,6 +153,16 @@ public class FrameApplication extends BaseApplication {
         }
 
         return realm;
+    }
+
+    /**
+     * 初始化Stetho调试工具
+     */
+    private void initStetho() {
+        Stetho.initialize(Stetho.newInitializerBuilder(this)
+                .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+                .enableWebKitInspector(RealmInspectorModulesProvider.builder(this).build())
+                .build());
     }
 
     private Application.ActivityLifecycleCallbacks lifecycleCallbacks = new Application.ActivityLifecycleCallbacks() {

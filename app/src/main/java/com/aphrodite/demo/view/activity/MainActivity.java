@@ -4,12 +4,15 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.aphrodite.demo.R;
 import com.aphrodite.demo.application.FrameApplication;
 import com.aphrodite.demo.model.api.RequestApi;
 import com.aphrodite.demo.model.bean.BeautyBean;
+import com.aphrodite.demo.model.database.dao.BeautyDao;
 import com.aphrodite.demo.model.network.BeautyResponse;
+import com.aphrodite.demo.utils.LogUtils;
 import com.aphrodite.demo.view.activity.base.BaseActivity;
 import com.aphrodite.demo.view.adapter.BeautyListAdapter;
 import com.aphrodite.demo.view.widget.recycleview.PullToRefreshRecyclerView;
@@ -18,11 +21,14 @@ import com.aphrodite.demo.view.widget.recycleview.inter.OnLoadMoreListener;
 import com.aphrodite.demo.view.widget.recycleview.inter.OnRefreshListener;
 import com.aphrodite.demo.view.widget.recycleview.view.FooterStyleLayout;
 import com.aphrodite.framework.utils.NetworkUtils;
+import com.aphrodite.framework.utils.UrlUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import butterknife.BindView;
 import io.reactivex.Observable;
@@ -33,6 +39,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class MainActivity extends BaseActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -42,6 +50,8 @@ public class MainActivity extends BaseActivity {
 
     private FooterStyleLayout mFooterStyleLayout;
     private BeautyListAdapter mBeautyListAdapter;
+
+    private Realm mRealm;
 
     private RequestApi mRequestApi;
 
@@ -62,6 +72,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        setTitleText(R.string.beauty_title);
+
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRefreshRecyclerView.setLayoutManager(layoutManager);
         SpacesItemDecoration decoration = new SpacesItemDecoration(10);
@@ -81,10 +93,24 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        showLoadingDialog();
-
+        try {
+            mRealm = FrameApplication.getApplication().getGlobalRealm();
+        } catch (FileNotFoundException e) {
+            LogUtils.e("Enter loadLocalData method.FileNotFoundException: " + e);
+        }
         mRequestApi = FrameApplication.getRetrofitInit().getRetrofit().create(RequestApi.class);
+
+        showLoadingDialog();
         queryBeauty();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (null != mRealm) {
+            mRealm.close();
+        }
     }
 
     private void queryBeauty() {
@@ -128,8 +154,8 @@ public class MainActivity extends BaseActivity {
                             return null;
                         }
 
-                        String url = beautyBean.getUrl();
-                        if (TextUtils.isEmpty(url)) {
+                        String url = beautyBean.getUrl().trim();
+                        if (TextUtils.isEmpty(url) || !UrlUtils.checkUrl(url)) {
                             return null;
                         }
 
@@ -139,6 +165,8 @@ public class MainActivity extends BaseActivity {
                             bitmap = Glide.with(MainActivity.this)
                                     .load(url)
                                     .asBitmap()
+                                    .crossFade()
+                                    .skipMemoryCache(true)
                                     .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
                                     .get();
                             if (null != bitmap) {
@@ -147,8 +175,9 @@ public class MainActivity extends BaseActivity {
                                 beautyBean.setWidth(width);
                                 beautyBean.setHeight(height);
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        } catch (ExecutionException e) {
+                            LogUtils.e("Enter queryBeauty method." + e);
+                            return beautyBean;
                         } finally {
                             bitmap.recycle();
                             bitmap = null;
@@ -161,7 +190,9 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public void onSubscribe(Disposable d) {
                         if (mPageNo <= 1) {
-                            mBeautyBeans.clear();
+                            if (null != mRealm) {
+                                deleteBeauty();
+                            }
                         }
                     }
 
@@ -175,6 +206,8 @@ public class MainActivity extends BaseActivity {
                         if (!mBeautyBeans.contains(bean)) {
                             mBeautyBeans.add(bean);
                         }
+
+                        saveBeauty(bean);
                     }
 
                     @Override
@@ -187,14 +220,51 @@ public class MainActivity extends BaseActivity {
 
                     @Override
                     public void onComplete() {
-                        mBeautyListAdapter.addItems(mBeautyBeans);
-
+                        if (mPageNo <= 1) {
+                            mBeautyListAdapter.setItems(mBeautyBeans);
+                        } else {
+                            mBeautyListAdapter.addItems(mBeautyBeans);
+                        }
                         mRefreshRecyclerView.setRefreshing(false);
                         mFooterStyleLayout.setStatus(FooterStyleLayout.END);
 
                         dismissLoadingDialog();
                     }
                 });
+    }
+
+    private void saveBeauty(final BeautyBean bean) {
+        if (null == bean || null == mRealm) {
+            return;
+        }
+
+        if (null == mRealm) {
+            return;
+        }
+
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                BeautyDao beautyDao = new BeautyDao();
+                beautyDao.copy(bean);
+
+                realm.copyToRealmOrUpdate(beautyDao);
+            }
+        });
+    }
+
+    private void deleteBeauty() {
+        if (null == mRealm) {
+            return;
+        }
+
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                RealmResults<BeautyDao> daos = mRealm.where(BeautyDao.class).findAll();
+                daos.deleteAllFromRealm();
+            }
+        });
     }
 
     private OnRefreshListener mRefreshListener = new OnRefreshListener() {
