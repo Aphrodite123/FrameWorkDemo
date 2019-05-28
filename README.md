@@ -1,9 +1,9 @@
 # FrameWorkDemo
 Help developers quickly build a simple project framework.
 
-# Dependency
+## Dependency
 
-Add this in your root build.gradle file (not your module build.gradle file):
+Add this in your root `build.gradle` file (not your module `build.gradle` file):
 
 ```
 allprojects {  
@@ -14,7 +14,7 @@ allprojects {
 }
 ```
 
-Then, add the library to your module build.gradle
+Then, add the library to your module `build.gradle`
 
 ```
 dependencies {  
@@ -22,15 +22,15 @@ dependencies {
 }
 ```
 
-# Features
+## Features
 
-# Usage
+## Usage
 
-# Usage with Fresco
+## Usage with Fresco
 
-# Subsampling Support
+## Subsampling Support
 
-# License
+## License
 Copyright 2018 Chris Banes
 
 Licensed under the Apache License, Version 2.0 (the "License");
