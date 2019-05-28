@@ -1,8 +1,6 @@
 # FrameWorkDemo
 Help developers quickly build a simple project framework.
 
-[![](https://dl.bintray.com/aphrodite/maven)](https://bintray.com/beta/#/aphrodite/maven/framework-base?tab=overview)
-
 # Dependency
 
 Add this in your root build.gradle file (not your module build.gradle file):
