@@ -5,10 +5,10 @@ Help developers quickly build a simple project framework.
 
 Add this in your root build.gradle file (not your module build.gradle file):
 
-allprojects {<br>	
-	repositories {<br>
-		mavenLocal()<br>
-		maven { url "https://jitpack.io" }
+allprojects {	
+	<br>repositories {
+		<br>mavenLocal()
+		<br>maven { url "https://jitpack.io" }
     }
 }
 
