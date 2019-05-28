@@ -1,7 +1,7 @@
 # FrameWorkDemo
 Help developers quickly build a simple project framework.
 
-[![](https://bintray.com/beta/#/aphrodite/maven/framework-base?tab=overview)
+[![](https://github.com/Aphrodite123/FrameWorkDemo.git)](https://bintray.com/beta/#/aphrodite/maven/framework-base?tab=overview)
 
 # Dependency
 
