@@ -22,4 +22,19 @@
         <item name="android:layout_height">1px</item>
     </style>
 
+    <style name="select_item_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/options_item_height</item>
+        <item name="android:paddingLeft">@dimen/options_item_left_margin</item>
+        <item name="android:paddingRight">@dimen/options_item_right_margin</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@drawable/common_click_bg</item>
+    </style>
+
+    <style name="divide_line_my_fragment">
+        <item name="android:background">@color/color_d9d9d9</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+    </style>
+
 </resources>

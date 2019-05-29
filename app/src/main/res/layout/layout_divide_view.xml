@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <View style="@style/divide_line_my_fragment" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/my_devices_bottom_margin"
+        android:background="@color/color_f7f7f7" />
+
+    <View style="@style/divide_line_my_fragment" />
+
+</merge>

@@ -2,8 +2,6 @@
 
     <style name="dialog_loading" parent="@android:style/Theme.Dialog">
         <item name="android:windowIsTranslucent">true</item>
-
-
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowContentOverlay">@null</item>
