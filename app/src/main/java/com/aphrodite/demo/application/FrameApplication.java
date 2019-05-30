@@ -5,36 +5,21 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.aphrodite.demo.BuildConfig;
 import com.aphrodite.demo.application.base.BaseApplication;
-import com.aphrodite.demo.config.HttpConfig;
 import com.aphrodite.demo.model.database.migration.GlobalRealmMigration;
 import com.aphrodite.demo.utils.LogUtils;
 import com.aphrodite.framework.model.network.api.RetrofitInitial;
-import com.aphrodite.framework.model.network.interceptor.BaseHeaderInterceptor;
-import com.aphrodite.framework.model.network.interceptor.BaseResponseInterceptor;
-import com.aphrodite.framework.utils.PathUtils;
+import com.aphrodite.framework.utils.ToastUtils;
 import com.facebook.stetho.Stetho;
-import com.franmontiel.persistentcookiejar.ClearableCookieJar;
-import com.franmontiel.persistentcookiejar.PersistentCookieJar;
-import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
-import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.concurrent.TimeUnit;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.exceptions.RealmMigrationNeededException;
-import okhttp3.Cache;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.aphrodite.demo.config.RuntimeConfig.DATABASE_NAME;
 import static com.aphrodite.demo.config.RuntimeConfig.DATABASE_VERSION;
@@ -46,8 +31,6 @@ public class FrameApplication extends BaseApplication {
     private static FrameApplication mIpenApplication;
 
     private int mActivityCount;
-
-    private static RetrofitInitial mRetrofitInitial;
 
     private RealmConfiguration mRealmConfiguration;
 
@@ -66,9 +49,9 @@ public class FrameApplication extends BaseApplication {
 
         initRealm();
 
-        initHttp();
-
         initStetho();
+
+        initToast();
     }
 
     @Override
@@ -85,42 +68,18 @@ public class FrameApplication extends BaseApplication {
         createGlobalRealm();
     }
 
-    private void initHttp() {
-        OkHttpClient.Builder okHttpBuilder = new OkHttpClient.Builder();
-        okHttpBuilder.connectTimeout(HttpConfig.DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS);
-        okHttpBuilder.writeTimeout(HttpConfig.DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS);
-        okHttpBuilder.readTimeout(HttpConfig.DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS);
-        okHttpBuilder.retryOnConnectionFailure(true);
-
-        ClearableCookieJar cookieJar = new PersistentCookieJar(new SetCookieCache(), new
-                SharedPrefsCookiePersistor(FrameApplication.getApplication()));
-        okHttpBuilder.cookieJar(cookieJar);
-
-        okHttpBuilder.cache(new Cache(new File(PathUtils.getExternalFileDir(this)), 10 * 1024 * 1024));
-
-        BaseHeaderInterceptor headerInterceptor = new BaseHeaderInterceptor();
-        BaseResponseInterceptor responseInterceptor = new BaseResponseInterceptor();
-        okHttpBuilder.addInterceptor(headerInterceptor);
-        okHttpBuilder.addInterceptor(responseInterceptor);
-
-        Retrofit.Builder builder = new Retrofit.Builder();
-        builder.baseUrl(BuildConfig.SERVER_URL);
-        builder.addConverterFactory(GsonConverterFactory.create());
-        builder.addCallAdapterFactory(RxJava2CallAdapterFactory.create());
-        builder.client(okHttpBuilder.build());
-
-        mRetrofitInitial = new RetrofitInitial.Builder()
-                .okHttpBuilder(okHttpBuilder)
-                .retrofitBuilder(builder)
-                .build();
-    }
-
     public boolean isAppBackground() {
         return 0 == mActivityCount;
     }
 
-    public static RetrofitInitial getRetrofitInit() {
-        return mRetrofitInitial;
+    public RetrofitInitial getRetrofitInit(boolean isJson, String baseUrl) {
+        RetrofitInitial retrofitInitial = new RetrofitInitial
+                .Builder()
+                .with(getApplication())
+                .isJson(isJson)
+                .baseUrl(baseUrl)
+                .build();
+        return retrofitInitial;
     }
 
     private void createGlobalRealm() {
@@ -156,6 +115,13 @@ public class FrameApplication extends BaseApplication {
     }
 
     /**
+     * 退出程序
+     */
+    public void exit() {
+        System.exit(0);
+    }
+
+    /**
      * 初始化Stetho调试工具
      */
     private void initStetho() {
@@ -163,6 +129,10 @@ public class FrameApplication extends BaseApplication {
                 .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
                 .enableWebKitInspector(RealmInspectorModulesProvider.builder(this).build())
                 .build());
+    }
+
+    private void initToast() {
+        ToastUtils.init(this);
     }
 
     private Application.ActivityLifecycleCallbacks lifecycleCallbacks = new Application.ActivityLifecycleCallbacks() {

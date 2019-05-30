@@ -19,7 +19,7 @@ public class BaseHeaderInterceptor implements Interceptor {
         Request originalRequest = chain.request();
         Request request = originalRequest.newBuilder()
                 .header("User-Agent", "Android, xxx")
-                .header("Accept", "application/json")
+                .header("Accept", "*/*")
                 .header("Content-type", "application/json")
                 .method(originalRequest.method(), originalRequest.body())
                 .build();

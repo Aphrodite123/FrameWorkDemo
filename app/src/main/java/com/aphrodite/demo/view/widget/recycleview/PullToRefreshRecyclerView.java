@@ -31,6 +31,7 @@ import com.aphrodite.demo.view.widget.recycleview.view.RefreshHeaderLayout;
 
 /**
  * Created by aspsine on 16/3/3.
+ * 上拉加载更多，下拉刷新，可自定义动画效果
  */
 public class PullToRefreshRecyclerView extends RecyclerView {
     private static final String TAG = PullToRefreshRecyclerView.class.getSimpleName();

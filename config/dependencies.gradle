@@ -7,6 +7,8 @@ def okhttpVersion = "3.9.1"
 def okhttpOkioVersion = "1.9.0"
 def retrofitVersion = "2.5.0"
 def glideVersion = "3.8.0"
+def scalarsVersion = "2.5.0"
+def persistentCookieJarVersion = "v1.0.1"
 
 project.ext {
     android = [
@@ -17,25 +19,27 @@ project.ext {
     ]
 
     dependVersion = [
-            "junit"             : "junit:junit:${junitVersion}",
+            "junit"              : "junit:junit:${junitVersion}",
 
-            "appcompat-v7"      : "com.android.support:appcompat-v7:${supportVersion}",
-            "design"            : "com.android.support:design:${supportVersion}",
-            "cardview"          : "com.android.support:cardview-v7:${supportVersion}",
-            "constraint-layout" : "com.android.support.constraint:constraint-layout:${constraintVersion}",
+            "appcompat-v7"       : "com.android.support:appcompat-v7:${supportVersion}",
+            "design"             : "com.android.support:design:${supportVersion}",
+            "cardview"           : "com.android.support:cardview-v7:${supportVersion}",
+            "constraint-layout"  : "com.android.support.constraint:constraint-layout:${constraintVersion}",
 
-            "rxjava"            : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
-            "rxandroid"         : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            "rxjava"             : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            "rxandroid"          : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
 
-            "okhttp"            : "com.squareup.okhttp3:okhttp:${okhttpVersion}",
-            "okhttp-okio"       : "com.squareup.okio:okio:${okhttpOkioVersion}",
-            "okhttp-interceptor": "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}",
+            "okhttp"             : "com.squareup.okhttp3:okhttp:${okhttpVersion}",
+            "okhttp-okio"        : "com.squareup.okio:okio:${okhttpOkioVersion}",
+            "okhttp-interceptor" : "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}",
 
-            "retrofit"          : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-            "converter-gson"    : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            "rxjava2-adapter"   : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+            "retrofit"           : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            "converter-gson"     : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            "rxjava2-adapter"    : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+            "converter-scalars"  : "com.squareup.retrofit2:converter-scalars:${scalarsVersion}",
+            "persistentCookieJar": "com.github.franmontiel:PersistentCookieJar:${persistentCookieJarVersion}",
 
-            "glide"             : "com.github.bumptech.glide:glide:${glideVersion}",
-            "glide-compiler"    : "com.github.bumptech.glide:compiler:${glideVersion}",
+            "glide"              : "com.github.bumptech.glide:glide:${glideVersion}",
+            "glide-compiler"     : "com.github.bumptech.glide:compiler:${glideVersion}",
     ]
 }

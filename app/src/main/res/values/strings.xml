@@ -14,6 +14,7 @@
     <string name="no_more">没有更多啦!</string>
 
     <!--MainActivity-->
+    <string name="press_exit_again">再按一次退出</string>
     <string name="beauty_title">美女推荐</string>
     <string name="recommend_more">更多推荐</string>
 

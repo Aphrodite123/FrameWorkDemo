@@ -58,4 +58,6 @@ dependencies {
     api dependVersion["retrofit"]
     api dependVersion["converter-gson"]
     api dependVersion["rxjava2-adapter"]
+    api dependVersion["converter-scalars"]
+    api dependVersion["persistentCookieJar"]
 }

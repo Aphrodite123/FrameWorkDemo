@@ -5,6 +5,8 @@ import com.aphrodite.demo.model.network.BeautyResponse;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 /**
  * <p>描述：通用的的api接口</p>
@@ -30,4 +32,7 @@ public interface RequestApi {
             @Path("count") int count,
             @Path("page") int page
     );
+
+    @GET()
+    Observable<String> queryMore(@Url() String url, @Query("pager_offset") int pagerOffset);
 }

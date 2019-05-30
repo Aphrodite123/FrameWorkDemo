@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
 
+import com.aphrodite.demo.BuildConfig;
 import com.aphrodite.demo.R;
 import com.aphrodite.demo.application.FrameApplication;
 import com.aphrodite.demo.model.api.RequestApi;
@@ -18,6 +19,7 @@ import com.aphrodite.demo.view.widget.recycleview.decoration.SpacesItemDecoratio
 import com.aphrodite.demo.view.widget.recycleview.inter.OnLoadMoreListener;
 import com.aphrodite.demo.view.widget.recycleview.inter.OnRefreshListener;
 import com.aphrodite.demo.view.widget.recycleview.view.FooterStyleLayout;
+import com.aphrodite.framework.model.network.api.RetrofitInitial;
 import com.aphrodite.framework.utils.NetworkUtils;
 import com.aphrodite.framework.utils.UrlUtils;
 import com.bumptech.glide.Glide;
@@ -46,6 +48,8 @@ import io.realm.RealmResults;
 public class BeautyListFragment extends BaseFragment {
     @BindView(R.id.beauty_list_irv)
     PullToRefreshRecyclerView mRefreshRecyclerView;
+
+    private RetrofitInitial mRetrofitInit;
 
     private FooterStyleLayout mFooterStyleLayout;
     private BeautyListAdapter mBeautyListAdapter;
@@ -92,7 +96,8 @@ public class BeautyListFragment extends BaseFragment {
         } catch (FileNotFoundException e) {
             LogUtils.e("Enter loadLocalData method.FileNotFoundException: " + e);
         }
-        mRequestApi = FrameApplication.getRetrofitInit().getRetrofit().create(RequestApi.class);
+        mRetrofitInit = FrameApplication.getApplication().getRetrofitInit(true, BuildConfig.SERVER_URL);
+        mRequestApi = mRetrofitInit.getRetrofit().create(RequestApi.class);
 
         showLoadingDialog();
         queryBeauty();

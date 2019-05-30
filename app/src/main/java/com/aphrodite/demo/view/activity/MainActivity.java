@@ -10,9 +10,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.aphrodite.demo.R;
+import com.aphrodite.demo.application.FrameApplication;
 import com.aphrodite.demo.view.activity.base.BaseActivity;
 import com.aphrodite.demo.view.fragment.BeautyListFragment;
 import com.aphrodite.demo.view.fragment.BeautyMoreFragment;
+import com.aphrodite.framework.utils.ToastUtils;
 
 import butterknife.BindView;
 
@@ -25,6 +27,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     TextView mBeautyMore;
 
     private FragmentManager mFragmentManager;
+
+    private long mExitTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if ((System.currentTimeMillis() - mExitTime) > 1000) {
+            //双击退出
+            ToastUtils.showMessage(R.string.press_exit_again);
+            mExitTime = System.currentTimeMillis();
+        } else {
+            // 退出
+            FrameApplication.getApplication().exit();
+        }
     }
 
     @Override
