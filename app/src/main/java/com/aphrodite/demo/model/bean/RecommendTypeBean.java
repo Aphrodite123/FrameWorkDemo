@@ -3,6 +3,8 @@ package com.aphrodite.demo.model.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.aphrodite.demo.model.database.dao.RecommendTypeDao;
+
 /**
  * Created by Aphrodite on 2019/5/30.
  */
@@ -55,5 +57,13 @@ public class RecommendTypeBean implements Parcelable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public void copy(RecommendTypeDao dao) {
+        if (null == dao) {
+            return;
+        }
+        setName(dao.getName());
+        setUrl(dao.getUrl());
     }
 }

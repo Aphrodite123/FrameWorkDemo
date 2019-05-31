@@ -76,13 +76,15 @@ public class RetrofitInitial {
                 mOkHttpBuilder.cookieJar(mCookieJar);
             }
 
-            if (null != mHeaderInterceptor) {
-                mOkHttpBuilder.addInterceptor(mHeaderInterceptor);
+            if (null == mHeaderInterceptor) {
+                mHeaderInterceptor = new BaseHeaderInterceptor();
             }
+            mOkHttpBuilder.addInterceptor(mHeaderInterceptor);
 
-            if (null != mResponseInterceptor) {
-                mOkHttpBuilder.addInterceptor(mResponseInterceptor);
+            if (null == mResponseInterceptor) {
+                mResponseInterceptor = new BaseResponseInterceptor();
             }
+            mOkHttpBuilder.addInterceptor(mResponseInterceptor);
 
             mOkHttpBuilder.cache(new Cache(new File(PathUtils.getExternalFileDir(mContext)), maxCacheSize));
         }

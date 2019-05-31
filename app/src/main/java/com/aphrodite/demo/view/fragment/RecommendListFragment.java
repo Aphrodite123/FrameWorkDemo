@@ -1,29 +1,36 @@
 package com.aphrodite.demo.view.fragment;
 
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
 
 import com.aphrodite.demo.BuildConfig;
 import com.aphrodite.demo.R;
 import com.aphrodite.demo.application.FrameApplication;
+import com.aphrodite.demo.config.AppConfig;
 import com.aphrodite.demo.model.api.RequestApi;
-import com.aphrodite.demo.model.bean.BeautyBean;
-import com.aphrodite.demo.model.database.dao.BeautyDao;
-import com.aphrodite.demo.model.network.BeautyResponse;
+import com.aphrodite.demo.model.bean.RecommendContentBean;
+import com.aphrodite.demo.model.bean.RecommendTypeBean;
+import com.aphrodite.demo.model.database.dao.RecommendContentDao;
+import com.aphrodite.demo.model.database.dao.RecommendTypeDao;
 import com.aphrodite.demo.utils.LogUtils;
 import com.aphrodite.demo.view.adapter.BeautyListAdapter;
 import com.aphrodite.demo.view.fragment.base.BaseFragment;
 import com.aphrodite.demo.view.widget.recycleview.PullToRefreshRecyclerView;
 import com.aphrodite.demo.view.widget.recycleview.decoration.SpacesItemDecoration;
-import com.aphrodite.demo.view.widget.recycleview.inter.OnLoadMoreListener;
-import com.aphrodite.demo.view.widget.recycleview.inter.OnRefreshListener;
 import com.aphrodite.demo.view.widget.recycleview.view.FooterStyleLayout;
 import com.aphrodite.framework.model.network.api.RetrofitInitial;
 import com.aphrodite.framework.utils.NetworkUtils;
+import com.aphrodite.framework.utils.ObjectUtils;
 import com.aphrodite.framework.utils.UrlUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -43,10 +50,10 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 
 /**
- * Created by Aphrodite on 2019/5/29.
+ * Created by Aphrodite on 2019/5/31.
  */
-public class BeautyListFragment extends BaseFragment {
-    @BindView(R.id.beauty_list_irv)
+public class RecommendListFragment extends BaseFragment {
+    @BindView(R.id.recommend_list_irv)
     PullToRefreshRecyclerView mRefreshRecyclerView;
 
     private FooterStyleLayout mFooterStyleLayout;
@@ -55,29 +62,25 @@ public class BeautyListFragment extends BaseFragment {
 
     private RetrofitInitial mRetrofitInit;
     private RequestApi mRequestApi;
+    private String mUrl;
 
-    private int mDefaultCount = 20;
-    private int mPageNo = 1;
+    private int mPagerOffset = 1;
 
-    private List<BeautyBean> mBeautyBeans;
+    private List<RecommendContentBean> mContentBeans;
 
     private BeautyListAdapter mBeautyListAdapter;
 
     @Override
     protected int getViewId() {
-        return R.layout.fragment_beauty_list;
+        return R.layout.fragment_recommend_list;
     }
 
     @Override
     protected void initView() {
-        setTitleText(R.string.beauty_title);
-
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRefreshRecyclerView.setLayoutManager(layoutManager);
         SpacesItemDecoration decoration = new SpacesItemDecoration(10);
         mRefreshRecyclerView.addItemDecoration(decoration);
-
-        mFooterStyleLayout = (FooterStyleLayout) mRefreshRecyclerView.getLoadMoreFooterView();
 
         mBeautyListAdapter = new BeautyListAdapter(getContext());
         mRefreshRecyclerView.setContainerAdapter(mBeautyListAdapter);
@@ -85,8 +88,6 @@ public class BeautyListFragment extends BaseFragment {
 
     @Override
     protected void initListener() {
-        mRefreshRecyclerView.setOnRefreshListener(mRefreshListener);
-        mRefreshRecyclerView.setOnLoadMoreListener(mLoadMoreListener);
     }
 
     @Override
@@ -94,13 +95,18 @@ public class BeautyListFragment extends BaseFragment {
         try {
             mRealm = FrameApplication.getApplication().getGlobalRealm();
         } catch (FileNotFoundException e) {
-            LogUtils.e("Enter loadLocalData method.FileNotFoundException: " + e);
+            LogUtils.e("Enter initData method.FileNotFoundException: " + e);
         }
-        mRetrofitInit = FrameApplication.getApplication().getRetrofitInit(true, BuildConfig.SERVER_URL);
+
+        Bundle bundle = getArguments();
+        if (!ObjectUtils.isEmpty(bundle)) {
+            mUrl = bundle.getString(AppConfig.IntentKey.RECOMMEND_PAGE_URL);
+        }
+
+        mRetrofitInit = FrameApplication.getApplication().getRetrofitInit(false, BuildConfig.SERVER_URL);
         mRequestApi = mRetrofitInit.getRetrofit().create(RequestApi.class);
 
-        showLoadingDialog();
-        queryBeauty();
+        queryContent();
     }
 
     @Override
@@ -111,13 +117,13 @@ public class BeautyListFragment extends BaseFragment {
         }
     }
 
-    private void queryBeauty() {
+    private void queryContent() {
         if (!NetworkUtils.isNetworkAvailable(getContext()) || null == mRequestApi) {
             dismissLoadingDialog();
             return;
         }
 
-        mBeautyBeans = new ArrayList<>();
+        mContentBeans = new ArrayList<>();
 
         ObservableTransformer transformer = new ObservableTransformer() {
             @Override
@@ -127,32 +133,29 @@ public class BeautyListFragment extends BaseFragment {
             }
         };
 
-        mRequestApi.queryBeauty(mDefaultCount, mPageNo)
+        mRequestApi.queryMore(mUrl, mPagerOffset)
                 .compose(transformer)
-                .map(new Function<BeautyResponse, List<BeautyBean>>() {
+                .map(new Function<String, List<RecommendContentBean>>() {
                     @Override
-                    public List<BeautyBean> apply(BeautyResponse beautyResponse) throws Exception {
-                        if (null == beautyResponse) {
-                            return null;
-                        }
-                        return beautyResponse.getResults();
+                    public List<RecommendContentBean> apply(String result) throws Exception {
+                        return parseTypes(result);
                     }
                 })
-                .flatMap(new Function<List<BeautyBean>, ObservableSource<BeautyBean>>() {
+                .flatMap(new Function<List<RecommendContentBean>, ObservableSource<RecommendContentBean>>() {
                     @Override
-                    public ObservableSource<BeautyBean> apply(List<BeautyBean> beautyBeans) throws Exception {
-                        return Observable.fromIterable(beautyBeans);
+                    public ObservableSource<RecommendContentBean> apply(List<RecommendContentBean> recommendContentBeans) throws Exception {
+                        return Observable.fromIterable(recommendContentBeans);
                     }
                 })
                 .observeOn(Schedulers.io())
-                .map(new Function<BeautyBean, BeautyBean>() {
+                .map(new Function<RecommendContentBean, RecommendContentBean>() {
                     @Override
-                    public BeautyBean apply(BeautyBean beautyBean) throws Exception {
-                        if (null == beautyBean) {
+                    public RecommendContentBean apply(RecommendContentBean recommendContentBean) throws Exception {
+                        if (null == recommendContentBean) {
                             return null;
                         }
 
-                        String url = beautyBean.getUrl().trim();
+                        String url = recommendContentBean.getUrl().trim();
                         if (TextUtils.isEmpty(url) || !UrlUtils.checkUrl(url)) {
                             return null;
                         }
@@ -170,123 +173,90 @@ public class BeautyListFragment extends BaseFragment {
                             if (null != bitmap) {
                                 int width = bitmap.getWidth();
                                 int height = bitmap.getHeight();
-                                beautyBean.setWidth(width);
-                                beautyBean.setHeight(height);
+                                recommendContentBean.setWidth(width);
+                                recommendContentBean.setHeight(height);
                             }
                         } catch (ExecutionException e) {
                             LogUtils.e("Enter queryBeauty method." + e);
-                            return beautyBean;
+                            return recommendContentBean;
                         } finally {
                             bitmap.recycle();
                             bitmap = null;
                         }
-                        return beautyBean;
+                        return recommendContentBean;
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<BeautyBean>() {
+                .subscribe(new Observer<RecommendContentBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        if (mPageNo <= 1) {
-                            if (null != mRealm) {
-                                deleteBeauty();
-                            }
-                        }
                     }
 
                     @Override
-                    public void onNext(BeautyBean bean) {
-                        if (null == bean) {
-                            mFooterStyleLayout.setStatus(FooterStyleLayout.END);
-                            return;
+                    public void onNext(RecommendContentBean bean) {
+                        if (!mContentBeans.contains(bean)) {
+                            mContentBeans.add(bean);
                         }
-
-                        if (!mBeautyBeans.contains(bean)) {
-                            mBeautyBeans.add(bean);
-                        }
-
-                        saveBeauty(bean);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        mRefreshRecyclerView.setRefreshing(false);
-                        mFooterStyleLayout.setStatus(FooterStyleLayout.END);
-
-                        dismissLoadingDialog();
+                        LogUtils.d("Enter onError method." + e);
                     }
 
                     @Override
                     public void onComplete() {
-                        if (mPageNo <= 1) {
-                            mBeautyListAdapter.setItems(mBeautyBeans);
-                        } else {
-                            mBeautyListAdapter.addItems(mBeautyBeans);
-                        }
-                        mRefreshRecyclerView.setRefreshing(false);
-                        mFooterStyleLayout.setStatus(FooterStyleLayout.END);
-
-                        dismissLoadingDialog();
+                        mBeautyListAdapter.setItems(mContentBeans);
+                        saveData();
                     }
                 });
     }
 
-    private void saveBeauty(final BeautyBean bean) {
-        if (null == bean || null == mRealm) {
-            return;
+    private List<RecommendContentBean> parseTypes(String response) {
+        Document document = Jsoup.parse(response);
+        Elements elements = document.select("div[class=img_single] > a");
+        List<RecommendContentBean> contentBeans = new ArrayList<>();
+        for (Element element : elements) {
+            if (null == element) {
+                continue;
+            }
+
+            RecommendContentBean contentBean = new RecommendContentBean();
+            contentBean.setId(element.attr("href").substring(element.attr("href").lastIndexOf("/") + 1));
+            contentBean.setTitle(element.select("img").attr("title"));
+            contentBean.setUrl(element.select("img").attr("src"));
+            String substring = mUrl.substring(mUrl.lastIndexOf("=") + 1);
+            int cid = 0;
+            if (!TextUtils.isEmpty(substring)) {
+                cid = Integer.parseInt(substring);
+            }
+            contentBean.setCid(cid);
+
+            contentBeans.add(contentBean);
         }
 
-        if (null == mRealm) {
+        return contentBeans;
+    }
+
+    private void saveData() {
+        if (ObjectUtils.isEmpty(mContentBeans) || null == mRealm) {
             return;
         }
-
         mRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                BeautyDao beautyDao = new BeautyDao();
-                beautyDao.copy(bean);
+                for (RecommendContentBean bean : mContentBeans) {
+                    if (null == bean) {
+                        continue;
+                    }
 
-                realm.copyToRealmOrUpdate(beautyDao);
+                    RecommendContentDao dao = new RecommendContentDao();
+                    dao.copy(bean);
+
+                    realm.copyToRealmOrUpdate(dao);
+                }
             }
         });
     }
-
-    private void deleteBeauty() {
-        if (null == mRealm) {
-            return;
-        }
-
-        mRealm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                RealmResults<BeautyDao> daos = mRealm.where(BeautyDao.class).findAll();
-                daos.deleteAllFromRealm();
-            }
-        });
-    }
-
-    private OnRefreshListener mRefreshListener = new OnRefreshListener() {
-        @Override
-        public void onRefresh() {
-            mPageNo = 1;
-            queryBeauty();
-            mFooterStyleLayout.setStatus(FooterStyleLayout.GONE);
-        }
-    };
-
-    private OnLoadMoreListener mLoadMoreListener = new OnLoadMoreListener() {
-        @Override
-        public void onLoadMore() {
-            if (null == mFooterStyleLayout) {
-                return;
-            }
-
-            if (mFooterStyleLayout.canLoadMore() && mBeautyListAdapter.getItemCount() > 0) {
-                mFooterStyleLayout.setStatus(FooterStyleLayout.LOADING);
-                mPageNo++;
-                queryBeauty();
-            }
-        }
-    };
 
 }

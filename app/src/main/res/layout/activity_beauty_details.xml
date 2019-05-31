@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/color_001425">
 
-    <android.support.v4.view.ViewPager
+    <com.aphrodite.demo.view.widget.viewpager.TouchViewPager
         android:id="@+id/beauty_details_vp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.aphrodite.demo.view.widget.recycleview.PullToRefreshRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/recommend_list_irv"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    app:loadMoreEnabled="true"
+    app:loadMoreFooterLayout="@layout/layout_rv_footer_container"
+    app:refreshEnabled="true"
+    app:refreshHeaderLayout="@layout/layout_rv_header_container" />

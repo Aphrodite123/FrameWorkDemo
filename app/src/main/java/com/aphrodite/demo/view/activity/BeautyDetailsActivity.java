@@ -13,7 +13,7 @@ import com.aphrodite.demo.model.database.dao.BeautyDao;
 import com.aphrodite.demo.utils.LogUtils;
 import com.aphrodite.demo.view.activity.base.BaseActivity;
 import com.aphrodite.demo.view.adapter.BeautyPagerAdapter;
-import com.aphrodite.framework.utils.ObjectUtils;
+import com.aphrodite.demo.view.widget.viewpager.TouchViewPager;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -32,8 +32,7 @@ public class BeautyDetailsActivity extends BaseActivity {
     @BindView(R.id.beauty_details_total)
     TextView mBeautyTotal;
     @BindView(R.id.beauty_details_vp)
-    ViewPager mViewPager;
-
+    TouchViewPager mViewPager;
 
     private Realm mRealm;
 
