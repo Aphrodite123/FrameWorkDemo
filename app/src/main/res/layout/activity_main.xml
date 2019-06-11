@@ -10,6 +10,4 @@
 
     <include layout="@layout/layout_menu_left" />
 
-    <include layout="@layout/layout_menu_right" />
-
 </android.support.v4.widget.DrawerLayout>

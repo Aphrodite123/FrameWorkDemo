@@ -12,9 +12,13 @@ public interface IntentAction {
     interface BeautyDetailsAction {
         String ACTION = ACTION_SUFFIX + "BEAUTYDETAILS";
 
+        String TYPE = "source_type";
+
         String ID = "source_id";
 
         String URL = "source_url";
+
+        String CID = "source_cid";
     }
 
 }

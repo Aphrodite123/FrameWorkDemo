@@ -1,5 +1,6 @@
 package com.aphrodite.demo.view.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -69,6 +70,7 @@ public class BeautyMoreFragment extends BaseFragment {
     @Override
     protected void initView() {
         setTitleText(R.string.recommend_more);
+        setTitleColor(Color.BLACK);
 
         mHorizontalRecycleView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         moreTabAdapter = new RecommendMoreTabAdapter(getContext(), RecommendMoreTabAdapter.MODE_FIX, mTabItemClickListener);
@@ -93,6 +95,8 @@ public class BeautyMoreFragment extends BaseFragment {
         mRetrofitInit = FrameApplication.getApplication().getRetrofitInit(false, BuildConfig.SERVER_URL);
         mRequestApi = mRetrofitInit.getRetrofit().create(RequestApi.class);
         mFragmentList = new ArrayList<>();
+
+        showLoadingDialog();
         queryBeautyMore();
     }
 
@@ -130,11 +134,12 @@ public class BeautyMoreFragment extends BaseFragment {
                     @Override
                     public void onError(Throwable e) {
                         LogUtils.d("Enter onError method." + e);
+                        dismissLoadingDialog();
                     }
 
                     @Override
                     public void onComplete() {
-
+                        dismissLoadingDialog();
                     }
                 });
     }

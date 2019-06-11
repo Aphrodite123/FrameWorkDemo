@@ -4,7 +4,7 @@
     android:id="@+id/beauty_list_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_2fcddf"
+    android:background="@android:color/white"
     android:orientation="vertical">
 
     <include layout="@layout/toolbar_general" />

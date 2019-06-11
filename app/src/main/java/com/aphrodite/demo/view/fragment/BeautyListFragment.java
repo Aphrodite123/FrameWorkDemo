@@ -1,6 +1,7 @@
 package com.aphrodite.demo.view.fragment;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
 
@@ -71,6 +72,7 @@ public class BeautyListFragment extends BaseFragment {
     @Override
     protected void initView() {
         setTitleText(R.string.beauty_title);
+        setTitleColor(Color.BLACK);
 
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRefreshRecyclerView.setLayoutManager(layoutManager);
@@ -188,9 +190,7 @@ public class BeautyListFragment extends BaseFragment {
                     @Override
                     public void onSubscribe(Disposable d) {
                         if (mPageNo <= 1) {
-                            if (null != mRealm) {
-                                deleteBeauty();
-                            }
+                            deleteBeauty();
                         }
                     }
 

@@ -9,7 +9,9 @@ import com.aphrodite.demo.application.FrameApplication;
 import com.aphrodite.demo.config.AppConfig;
 import com.aphrodite.demo.config.IntentAction;
 import com.aphrodite.demo.model.bean.BeautyBean;
+import com.aphrodite.demo.model.bean.RecommendContentBean;
 import com.aphrodite.demo.model.database.dao.BeautyDao;
+import com.aphrodite.demo.model.database.dao.RecommendContentDao;
 import com.aphrodite.demo.utils.LogUtils;
 import com.aphrodite.demo.view.activity.base.BaseActivity;
 import com.aphrodite.demo.view.adapter.BeautyPagerAdapter;
@@ -36,8 +38,10 @@ public class BeautyDetailsActivity extends BaseActivity {
 
     private Realm mRealm;
 
+    private int mSourceType;
     private String mId;
     private String mUrl;
+    private int mCid = -1;
     private int mCurPage;
 
     private BeautyPagerAdapter mPagerAdapter;
@@ -68,8 +72,10 @@ public class BeautyDetailsActivity extends BaseActivity {
 
         Intent intent = getIntent();
         if (null != intent) {
+            mSourceType = intent.getIntExtra(IntentAction.BeautyDetailsAction.TYPE, mSourceType);
             mId = intent.getStringExtra(IntentAction.BeautyDetailsAction.ID);
             mUrl = intent.getStringExtra(IntentAction.BeautyDetailsAction.URL);
+            mCid = intent.getIntExtra(IntentAction.BeautyDetailsAction.CID, mCid);
         }
 
         loadLocalData();
@@ -80,27 +86,60 @@ public class BeautyDetailsActivity extends BaseActivity {
             return;
         }
 
-        RealmResults<BeautyDao> daos = mRealm.where(BeautyDao.class).findAll();
-        if (null != daos) {
-            List<BeautyBean> beans = new ArrayList<>();
-            for (int i = 0; i < daos.size(); i++) {
-                BeautyDao dao = daos.get(i);
-                if (null == dao) {
-                    continue;
+        switch (mSourceType) {
+            case AppConfig.SourceType.BEAUTY:
+                RealmResults<BeautyDao> daos = mRealm.where(BeautyDao.class).findAll();
+                if (null != daos) {
+                    List<BeautyBean> beans = new ArrayList<>();
+                    for (int i = 0; i < daos.size(); i++) {
+                        BeautyDao dao = daos.get(i);
+                        if (null == dao) {
+                            continue;
+                        }
+
+                        BeautyBean bean = new BeautyBean();
+                        bean.copy(dao);
+
+                        beans.add(bean);
+
+                        if (mId.equals(bean.get_id())) {
+                            mCurPage = i;
+                        }
+                    }
+                    mPagerAdapter.setItems(beans);
+                    mViewPager.setCurrentItem(mCurPage);
+                    updateIndex();
                 }
+                break;
+            case AppConfig.SourceType.RECOMMEND:
+                RealmResults<RecommendContentDao> contentDaos = mRealm
+                        .where(RecommendContentDao.class)
+                        .equalTo("cid", mCid)
+                        .findAll();
+                if (null != contentDaos) {
+                    List<RecommendContentBean> beans = new ArrayList<>();
+                    for (int i = 0; i < contentDaos.size(); i++) {
+                        RecommendContentDao dao = contentDaos.get(i);
+                        if (null == dao) {
+                            continue;
+                        }
 
-                BeautyBean bean = new BeautyBean();
-                bean.copy(dao);
+                        RecommendContentBean bean = new RecommendContentBean();
+                        bean.copy(dao);
 
-                beans.add(bean);
+                        beans.add(bean);
 
-                if (mId.equals(bean.get_id())) {
-                    mCurPage = i;
+                        if (mId.equals(bean.getId())) {
+                            mCurPage = i;
+                        }
+                    }
+                    mPagerAdapter.setItems(beans);
+                    mViewPager.setCurrentItem(mCurPage);
+                    updateIndex();
                 }
-            }
-            mPagerAdapter.setItems(beans);
-            mViewPager.setCurrentItem(mCurPage);
-            updateIndex();
+                break;
+            default:
+                break;
         }
     }
 

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.aphrodite.demo.R;
 import com.aphrodite.demo.model.bean.BeautyBean;
+import com.aphrodite.demo.model.bean.RecommendContentBean;
 import com.aphrodite.framework.utils.ObjectUtils;
 import com.aphrodite.framework.view.adapter.BasePagerAdapter;
 import com.aphrodite.framework.view.widget.photoview.PhotoView;
@@ -69,8 +70,16 @@ public class BeautyPagerAdapter<T> extends BasePagerAdapter {
                     .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                     .dontAnimate()
                     .into(mPhotoView);
+        } else if (t instanceof RecommendContentBean) {
+            RecommendContentBean contentBean = (RecommendContentBean) t;
+            Glide.with(mContext)
+                    .load(contentBean.getUrl())
+                    .asBitmap()
+                    .placeholder(R.drawable.icon_beauty_default)
+                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                    .dontAnimate()
+                    .into(mPhotoView);
         }
-
     }
 
 }

@@ -91,12 +91,12 @@ public class RecommendContentBean implements Parcelable {
         return height;
     }
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
     public int getCid() {
         return cid;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     public void setCid(int cid) {

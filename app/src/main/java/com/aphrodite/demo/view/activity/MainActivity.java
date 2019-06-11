@@ -2,7 +2,6 @@ package com.aphrodite.demo.view.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
@@ -11,10 +10,13 @@ import android.widget.TextView;
 
 import com.aphrodite.demo.R;
 import com.aphrodite.demo.application.FrameApplication;
+import com.aphrodite.demo.model.event.SyncEvent;
 import com.aphrodite.demo.view.activity.base.BaseActivity;
 import com.aphrodite.demo.view.fragment.BeautyListFragment;
 import com.aphrodite.demo.view.fragment.BeautyMoreFragment;
 import com.aphrodite.framework.utils.ToastUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 
@@ -42,6 +44,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void initView() {
+        setStatusBarColor(this);
     }
 
     @Override

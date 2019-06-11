@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.aphrodite.demo.R;
+import com.aphrodite.demo.config.AppConfig;
 import com.aphrodite.demo.config.IntentAction;
 import com.aphrodite.demo.model.bean.BeautyBean;
 import com.aphrodite.demo.model.bean.RecommendContentBean;
@@ -61,6 +62,7 @@ public class BeautyListAdapter<T> extends BaseRecyclerAdapter<T, BeautyListAdapt
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(IntentAction.BeautyDetailsAction.ACTION);
+                    intent.putExtra(IntentAction.BeautyDetailsAction.TYPE, AppConfig.SourceType.BEAUTY);
                     intent.putExtra(IntentAction.BeautyDetailsAction.ID, bean.get_id());
                     intent.putExtra(IntentAction.BeautyDetailsAction.URL, bean.getUrl());
                     mContext.startActivity(intent);
@@ -86,8 +88,10 @@ public class BeautyListAdapter<T> extends BaseRecyclerAdapter<T, BeautyListAdapt
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(IntentAction.BeautyDetailsAction.ACTION);
+                    intent.putExtra(IntentAction.BeautyDetailsAction.TYPE, AppConfig.SourceType.RECOMMEND);
                     intent.putExtra(IntentAction.BeautyDetailsAction.ID, bean.getId());
                     intent.putExtra(IntentAction.BeautyDetailsAction.URL, bean.getUrl());
+                    intent.putExtra(IntentAction.BeautyDetailsAction.CID, bean.getCid());
                     mContext.startActivity(intent);
                 }
             });

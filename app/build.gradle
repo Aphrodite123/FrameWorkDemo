@@ -55,6 +55,17 @@ android {
             debuggable false
         }
     }
+
+    //自定义APK名称,多渠道打包
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->  // each 改为 all
+            def fileName = "启蒙v" + defaultConfig.versionName + ".apk"
+            def outFile = output.outputFile
+            if (outFile != null && outFile.name.endsWith('.apk')) {
+                outputFileName = fileName  //  output.outputFile 改为 outputFileName
+            }
+        }
+    }
 }
 
 dependencies {
@@ -83,4 +94,8 @@ dependencies {
      * Jsoup 网页爬虫
      */
     implementation 'org.jsoup:jsoup:1.12.1'
+    /**
+     * EventBus
+     */
+    implementation 'org.greenrobot:eventbus:3.1.1'
 }

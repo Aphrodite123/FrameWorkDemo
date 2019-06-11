@@ -11,14 +11,15 @@ import com.aphrodite.demo.application.FrameApplication;
 import com.aphrodite.demo.config.AppConfig;
 import com.aphrodite.demo.model.api.RequestApi;
 import com.aphrodite.demo.model.bean.RecommendContentBean;
-import com.aphrodite.demo.model.bean.RecommendTypeBean;
+import com.aphrodite.demo.model.database.dao.BeautyDao;
 import com.aphrodite.demo.model.database.dao.RecommendContentDao;
-import com.aphrodite.demo.model.database.dao.RecommendTypeDao;
 import com.aphrodite.demo.utils.LogUtils;
 import com.aphrodite.demo.view.adapter.BeautyListAdapter;
 import com.aphrodite.demo.view.fragment.base.BaseFragment;
 import com.aphrodite.demo.view.widget.recycleview.PullToRefreshRecyclerView;
 import com.aphrodite.demo.view.widget.recycleview.decoration.SpacesItemDecoration;
+import com.aphrodite.demo.view.widget.recycleview.inter.OnLoadMoreListener;
+import com.aphrodite.demo.view.widget.recycleview.inter.OnRefreshListener;
 import com.aphrodite.demo.view.widget.recycleview.view.FooterStyleLayout;
 import com.aphrodite.framework.model.network.api.RetrofitInitial;
 import com.aphrodite.framework.utils.NetworkUtils;
@@ -82,12 +83,16 @@ public class RecommendListFragment extends BaseFragment {
         SpacesItemDecoration decoration = new SpacesItemDecoration(10);
         mRefreshRecyclerView.addItemDecoration(decoration);
 
+        mFooterStyleLayout = (FooterStyleLayout) mRefreshRecyclerView.getLoadMoreFooterView();
+
         mBeautyListAdapter = new BeautyListAdapter(getContext());
         mRefreshRecyclerView.setContainerAdapter(mBeautyListAdapter);
     }
 
     @Override
     protected void initListener() {
+        mRefreshRecyclerView.setOnRefreshListener(mRefreshListener);
+        mRefreshRecyclerView.setOnLoadMoreListener(mLoadMoreListener);
     }
 
     @Override
@@ -190,24 +195,51 @@ public class RecommendListFragment extends BaseFragment {
                 .subscribe(new Observer<RecommendContentBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                    }
-
-                    @Override
-                    public void onNext(RecommendContentBean bean) {
-                        if (!mContentBeans.contains(bean)) {
-                            mContentBeans.add(bean);
+                        if (mPagerOffset <= 1) {
+                            deleteBeauty();
                         }
                     }
 
                     @Override
+                    public void onNext(RecommendContentBean bean) {
+                        if (null == bean) {
+                            mFooterStyleLayout.setStatus(FooterStyleLayout.END);
+                            return;
+                        }
+
+                        if (!mContentBeans.contains(bean)) {
+                            mContentBeans.add(bean);
+                        }
+
+                        saveData(bean);
+                    }
+
+                    @Override
                     public void onError(Throwable e) {
-                        LogUtils.d("Enter onError method." + e);
+                        if (null != mRefreshRecyclerView) {
+                            mRefreshRecyclerView.setRefreshing(false);
+                        }
+
+                        if (null != mFooterStyleLayout) {
+                            mFooterStyleLayout.setStatus(FooterStyleLayout.END);
+                        }
                     }
 
                     @Override
                     public void onComplete() {
-                        mBeautyListAdapter.setItems(mContentBeans);
-                        saveData();
+                        if (mPagerOffset <= 1) {
+                            mBeautyListAdapter.setItems(mContentBeans);
+                        } else {
+                            mBeautyListAdapter.addItems(mContentBeans);
+                        }
+
+                        if (null != mRefreshRecyclerView) {
+                            mRefreshRecyclerView.setRefreshing(false);
+                        }
+
+                        if (null != mFooterStyleLayout) {
+                            mFooterStyleLayout.setStatus(FooterStyleLayout.END);
+                        }
                     }
                 });
     }
@@ -225,8 +257,14 @@ public class RecommendListFragment extends BaseFragment {
             contentBean.setId(element.attr("href").substring(element.attr("href").lastIndexOf("/") + 1));
             contentBean.setTitle(element.select("img").attr("title"));
             contentBean.setUrl(element.select("img").attr("src"));
-            String substring = mUrl.substring(mUrl.lastIndexOf("=") + 1);
+
+            String substring = null;
             int cid = 0;
+
+            if (!TextUtils.isEmpty(mUrl) && mUrl.contains("?cid=")) {
+                substring = mUrl.substring(mUrl.lastIndexOf("=") + 1);
+            }
+
             if (!TextUtils.isEmpty(substring)) {
                 cid = Integer.parseInt(substring);
             }
@@ -238,25 +276,57 @@ public class RecommendListFragment extends BaseFragment {
         return contentBeans;
     }
 
-    private void saveData() {
-        if (ObjectUtils.isEmpty(mContentBeans) || null == mRealm) {
+    private void saveData(final RecommendContentBean bean) {
+        if (null == mRealm || null == bean) {
             return;
         }
         mRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                for (RecommendContentBean bean : mContentBeans) {
-                    if (null == bean) {
-                        continue;
-                    }
+                RecommendContentDao dao = new RecommendContentDao();
+                dao.copy(bean);
 
-                    RecommendContentDao dao = new RecommendContentDao();
-                    dao.copy(bean);
-
-                    realm.copyToRealmOrUpdate(dao);
-                }
+                realm.copyToRealmOrUpdate(dao);
             }
         });
     }
+
+    private void deleteBeauty() {
+        if (null == mRealm) {
+            return;
+        }
+
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                RealmResults<BeautyDao> daos = mRealm.where(BeautyDao.class).findAll();
+                daos.deleteAllFromRealm();
+            }
+        });
+    }
+
+    private OnRefreshListener mRefreshListener = new OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+            mPagerOffset = 1;
+            queryContent();
+            mFooterStyleLayout.setStatus(FooterStyleLayout.GONE);
+        }
+    };
+
+    private OnLoadMoreListener mLoadMoreListener = new OnLoadMoreListener() {
+        @Override
+        public void onLoadMore() {
+            if (null == mFooterStyleLayout) {
+                return;
+            }
+
+            if (mFooterStyleLayout.canLoadMore() && mBeautyListAdapter.getItemCount() > 0) {
+                mFooterStyleLayout.setStatus(FooterStyleLayout.LOADING);
+                mPagerOffset++;
+                queryContent();
+            }
+        }
+    };
 
 }
