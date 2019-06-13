@@ -1,5 +1,5 @@
 # FrameWorkDemo
-Help developers quickly build a simple project framework.
+Help developers quickly build a simple project framework. 
 [ ![Download](https://api.bintray.com/packages/aphrodite/maven/framework-base/images/download.svg?version=1.0.2) ](https://bintray.com/aphrodite/maven/framework-base/1.0.2/link)
 
 ## Dependency
