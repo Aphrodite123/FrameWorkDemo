@@ -20,7 +20,7 @@ Then, add the library to your module `build.gradle`
 
 ```gradle
 dependencies {  
-    implementation 'com.aphrodite.framework:framework-base:1.0.1'
+    implementation 'com.aphrodite.framework:framework-base:1.0.2'
 }
 ```
 
