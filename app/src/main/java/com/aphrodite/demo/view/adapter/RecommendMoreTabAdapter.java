@@ -47,23 +47,24 @@ public class RecommendMoreTabAdapter<T> extends BaseRecyclerAdapter<T, Recommend
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecommendMoreTabAdapter.ViewHolder holder, final int position) {
-        final RecommendTypeBean categoryBean = (RecommendTypeBean) getItem(position);
+    public void onBindViewHolder(@NonNull RecommendMoreTabAdapter.ViewHolder holder, int position) {
+        final int index = position;
+        final RecommendTypeBean categoryBean = (RecommendTypeBean) getItem(index);
         if (null == categoryBean) {
             return;
         }
 
         holder.tvName.setText(categoryBean.getName());
-        holder.tvName.setSelected(currentPosition == position);
-        holder.ivTag.setVisibility(currentPosition == position ? View.VISIBLE : View.INVISIBLE);
+        holder.tvName.setSelected(currentPosition == index);
+        holder.ivTag.setVisibility(currentPosition == index ? View.VISIBLE : View.INVISIBLE);
 
         holder.root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setCurrentPosition(position);
+                setCurrentPosition(index);
 
                 if (null != listener) {
-                    listener.onItemClick(position);
+                    listener.onItemClick(index);
                 }
             }
         });
