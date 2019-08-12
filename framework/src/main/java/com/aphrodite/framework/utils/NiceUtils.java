@@ -78,8 +78,8 @@ public class NiceUtils {
     /**
      * 获取屏幕宽度
      *
-     * @param context
-     * @return width of the screen.
+     * @param context context
+     * @return width of screen
      */
     public static int getScreenWidth(Context context) {
         return context.getResources().getDisplayMetrics().widthPixels;
@@ -88,7 +88,7 @@ public class NiceUtils {
     /**
      * 获取屏幕高度
      *
-     * @param context
+     * @param context context
      * @return heiht of the screen.
      */
     public static int getScreenHeight(Context context) {
@@ -98,7 +98,7 @@ public class NiceUtils {
     /**
      * dp转px
      *
-     * @param context
+     * @param context context
      * @param dpVal   dp value
      * @return px value
      */
@@ -133,8 +133,9 @@ public class NiceUtils {
     /**
      * 保存播放位置，以便下次播放时接着上次的位置继续播放.
      *
-     * @param context
-     * @param url     视频链接url
+     * @param context  context
+     * @param url      视频链接url
+     * @param position position
      */
     public static void savePlayPosition(Context context, String url, long position) {
         context.getSharedPreferences("NICE_VIDEO_PALYER_PLAY_POSITION",
@@ -147,7 +148,7 @@ public class NiceUtils {
     /**
      * 取出上次保存的播放位置
      *
-     * @param context
+     * @param context context
      * @param url     视频链接url
      * @return 上次保存的播放位置
      */

@@ -13,9 +13,9 @@ public class UrlUtils {
     /**
      * 向url链接追加参数
      *
-     * @param url
-     * @param params Map<String, String>
-     * @return
+     * @param url    url
+     * @param params params
+     * @return dest url
      */
     public static String appendParams(String url, Map<String, String> params) {
         if (StrUtils.isBlank(url)) {
@@ -47,12 +47,12 @@ public class UrlUtils {
     }
 
     /**
-     * 向url链接追加参数(单个)
+     * 向url链接追加单个参数
      *
-     * @param url
+     * @param url   url
      * @param name  String
      * @param value String
-     * @return
+     * @return dest url
      */
     public static String appendParam(String url, String name, String value) {
         if (StrUtils.isBlank(url)) {
@@ -69,9 +69,9 @@ public class UrlUtils {
     /**
      * 移除url链接的多个参数
      *
-     * @param url        String
-     * @param paramNames String[]
-     * @return
+     * @param url        url
+     * @param paramNames remove params
+     * @return result
      */
     public static String removeParams(String url, String... paramNames) {
         if (StrUtils.isBlank(url)) {
@@ -128,8 +128,8 @@ public class UrlUtils {
     /**
      * 检查url的合法性
      *
-     * @param url
-     * @return
+     * @param url url
+     * @return true:符合标准，false:不符合标准
      */
     public static boolean checkUrl(String url) {
         if (Patterns.WEB_URL.matcher(url).matches()) {

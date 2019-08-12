@@ -27,6 +27,8 @@ public class GlideCacheUtil {
 
     /**
      * 清除图片磁盘缓存
+     *
+     * @param context context
      */
     public void clearImageDiskCache(final Context context) {
         try {
@@ -47,6 +49,8 @@ public class GlideCacheUtil {
 
     /**
      * 清除图片内存缓存
+     *
+     * @param context context
      */
     public void clearImageMemoryCache(Context context) {
         try {
@@ -60,6 +64,8 @@ public class GlideCacheUtil {
 
     /**
      * 清除图片所有缓存
+     *
+     * @param context context
      */
     public void clearImageAllCache(Context context) {
         clearImageDiskCache(context);
@@ -71,7 +77,8 @@ public class GlideCacheUtil {
     /**
      * 获取Glide造成的缓存大小
      *
-     * @return CacheSize
+     * @param context context
+     * @return size of cache
      */
     public String getCacheSize(Context context) {
         try {

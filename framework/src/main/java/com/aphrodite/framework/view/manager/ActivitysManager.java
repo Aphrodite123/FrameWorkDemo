@@ -18,6 +18,8 @@ public class ActivitysManager {
 
     /**
      * 单一实例
+     *
+     * @return Object of ActivitysManager
      */
     public static ActivitysManager getInstance() {
         if (null == sInstance) {
@@ -32,6 +34,8 @@ public class ActivitysManager {
 
     /**
      * 添加Activity到堆栈
+     *
+     * @param activity Object of Activity
      */
     public void addActivity(Activity activity) {
         if (null == mStacks) {
@@ -42,6 +46,8 @@ public class ActivitysManager {
 
     /**
      * 获取当前Activity（堆栈中最后一个压入的）
+     *
+     * @return The current activity
      */
     public Activity getCurrentActivity() {
         Activity activity = mStacks.lastElement();
@@ -50,6 +56,9 @@ public class ActivitysManager {
 
     /**
      * 获取指定类名的Activity
+     *
+     * @param cls class
+     * @return The specifc of Activity
      */
     public Activity getActivity(Class<?> cls) {
         for (Activity activity : mStacks) {
@@ -77,6 +86,8 @@ public class ActivitysManager {
 
     /**
      * 结束指定的Activity
+     *
+     * @param activity activity
      */
     public void finishActivity(Activity activity) {
         if (activity != null) {
@@ -88,6 +99,8 @@ public class ActivitysManager {
 
     /**
      * 结束指定类名的Activity
+     *
+     * @param cls class
      */
     public void finishActivity(Class<?> cls) {
         for (Activity activity : mStacks) {
@@ -111,6 +124,8 @@ public class ActivitysManager {
 
     /**
      * 退出应用程序
+     *
+     * @param context context
      */
     public void appExit(Context context) {
         try {

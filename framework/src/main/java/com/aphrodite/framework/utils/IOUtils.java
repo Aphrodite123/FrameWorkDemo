@@ -54,7 +54,8 @@ public class IOUtils {
      * Serializes the given object value to a newly allocated byte array.
      *
      * @param value object value to serialize
-     * @since 1.16
+     * @return size
+     * @throws IOException e
      */
     public static byte[] serialize(Object value) throws IOException {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -67,7 +68,7 @@ public class IOUtils {
      *
      * @param value        object value to serialize
      * @param outputStream output stream to serialize into
-     * @since 1.16
+     * @throws IOException e
      */
     public static void serialize(Object value, OutputStream outputStream) throws IOException {
         try {
@@ -81,8 +82,9 @@ public class IOUtils {
      * Deserializes the given byte array into to a newly allocated object.
      *
      * @param bytes byte array to deserialize or {@code null} for {@code null} result
+     * @param <S>   child class of Serializable
      * @return new allocated object or {@code null} for {@code null} input
-     * @since 1.16
+     * @throws IOException e
      */
     public static <S extends Serializable> S deserialize(byte[] bytes) throws IOException {
         if (bytes == null) {
@@ -93,10 +95,12 @@ public class IOUtils {
 
     /**
      * Deserializes the given input stream into to a newly allocated object, and close the input
-     * stream.
+     * stream
      *
      * @param inputStream input stream to deserialize
-     * @since 1.16
+     * @param <S> child class of Serializable
+     * @return input stream object
+     * @throws IOException e
      */
     @SuppressWarnings("unchecked")
     public static <S extends Serializable> S deserialize(InputStream inputStream)

@@ -160,9 +160,9 @@ public class FolderUtils {
     /**
      * 解压文件
      *
-     * @param zipFilename
-     * @param outPath
-     * @return
+     * @param zipFilename zip file
+     * @param outPath out file
+     * @return return false
      */
     public static boolean unzipFolder(String zipFilename, String outPath) {
         if (!FileUtils.isFileExist(zipFilename) || TextUtils.isEmpty(outPath))
@@ -253,9 +253,9 @@ public class FolderUtils {
      * 文件拷贝
      * 要复制的目录下的所有非子目录(文件夹)文件拷贝
      *
-     * @param fromFile
-     * @param toFile
-     * @return
+     * @param fromFile from file
+     * @param toFile to file
+     * @return return false
      */
     public static boolean CopySdcardFile(String fromFile, String toFile) {
         try {

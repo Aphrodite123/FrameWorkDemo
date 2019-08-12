@@ -6,20 +6,12 @@ import java.util.Map;
  * Created by Aphrodite on 2019/4/1.
  */
 public class StrUtils {
+
     /**
-     * <p>Checks if a String is whitespace, empty ("") or null.</p>
-     * <p>
-     * <pre>
-     * StringUtils.isBlank(null)      = true
-     * StringUtils.isBlank("")        = true
-     * StringUtils.isBlank(" ")       = true
-     * StringUtils.isBlank("bob")     = false
-     * StringUtils.isBlank("  bob  ") = false
-     * </pre>
+     * Checks if a String is whitespace, empty ("") or null.
      *
-     * @param str the String to check, may be null
-     * @return <code>true</code> if the String is null, empty or whitespace
-     * @since 2.0
+     * @param str str
+     * @return true or false
      */
     public static boolean isBlank(String str) {
         int strLen;
@@ -37,8 +29,10 @@ public class StrUtils {
     /**
      * 判断Map是否为空
      *
-     * @param map
-     * @return
+     * @param map map
+     * @param <K> key
+     * @param <V> value
+     * @return true or false
      */
     public static <K, V> boolean isEmptyMap(Map<K, V> map) {
         return (map == null || map.size() < 1);
@@ -47,8 +41,8 @@ public class StrUtils {
     /**
      * 判断数组是否为空
      *
-     * @param obj
-     * @return
+     * @param obj array of obj
+     * @return true or false
      */
     public static boolean isEmptyArray(Object[] obj) {
         return (obj == null || obj.length < 1);

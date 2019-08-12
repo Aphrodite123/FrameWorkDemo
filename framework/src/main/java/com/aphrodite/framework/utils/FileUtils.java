@@ -29,11 +29,6 @@ public class FileUtils {
         throw new AssertionError();
     }
 
-    /**
-     * read file
-     *
-     * @return if file not exist, return "", else return content of file
-     */
     public static String readFile(String filePath) {
         FileReader fileReader = null;
         try {
@@ -51,14 +46,6 @@ public class FileUtils {
         return "";
     }
 
-    /**
-     * write file
-     *
-     * @param append is append, if true, write to the end of file, else clear content of file and
-     *               write into it
-     * @return return false if content is empty, true otherwise
-     * @throws RuntimeException if an error occurs while operator FileWriter
-     */
     public static boolean writeFile(String filePath, String content, boolean append) {
         if (TextUtils.isEmpty(content)) {
             return false;
@@ -77,14 +64,6 @@ public class FileUtils {
         }
     }
 
-    /**
-     * write file
-     *
-     * @param append is append, if true, write to the end of file, else clear content of file and
-     *               write into it
-     * @return return false if contentList is empty, true otherwise
-     * @throws RuntimeException if an error occurs while operator FileWriter
-     */
     public static boolean writeFile(String filePath, List<String> contentList, boolean append) {
         if (contentList == null || contentList.size() == 0) {
             return false;
@@ -136,6 +115,7 @@ public class FileUtils {
      *
      * @param filePath the file to be opened for writing.
      * @param stream   the input stream
+     * @return return false
      */
     public static boolean writeFile(String filePath, InputStream stream) {
         return writeFile(filePath, stream, false);
@@ -449,8 +429,8 @@ public class FileUtils {
     /**
      * 解压文件
      *
-     * @param sZipPathFile
-     * @param sDestPath
+     * @param sZipPathFile object file
+     * @param sDestPath dest file
      * @return 成功/失败
      */
     public static boolean extractFile(String sZipPathFile, String sDestPath) {

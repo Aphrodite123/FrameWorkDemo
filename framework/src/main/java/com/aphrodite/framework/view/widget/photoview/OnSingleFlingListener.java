@@ -13,8 +13,9 @@ public interface OnSingleFlingListener {
      *
      * @param e1        MotionEvent the user first touch.
      * @param e2        MotionEvent the user last touch.
-     * @param velocityX distance of user's horizontal fling.
-     * @param velocityY distance of user's vertical fling.
+     * @param velocityX Distance of user's horizontal fling.
+     * @param velocityY Distance of user's vertical fling.
+     * @return true or false
      */
     boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY);
 }

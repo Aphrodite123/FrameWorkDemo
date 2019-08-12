@@ -24,8 +24,8 @@ public class ObjectUtils {
     /**
      * 对象是否为空
      *
-     * @param s
-     * @return
+     * @param s object
+     * @return true
      */
     public static boolean isEmpty(Object s) {
         if (s == null) {
@@ -51,7 +51,7 @@ public class ObjectUtils {
      *
      * @param s 对象
      * @param i 索引
-     * @return
+     * @return true
      */
     public static boolean isOutOfBounds(Object s, int i) {
         if (s == null || i < 0) {

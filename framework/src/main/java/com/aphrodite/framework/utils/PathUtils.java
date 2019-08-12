@@ -15,7 +15,7 @@ public class PathUtils {
     /**
      * 外置存储是否可用
      *
-     * @return
+     * @return true or false
      */
     public static boolean isExternalStorageAvailable() {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
@@ -24,8 +24,8 @@ public class PathUtils {
     /**
      * 获取外置存储卡路径
      *
-     * @param context
-     * @return
+     * @param context context
+     * @return true or false
      */
     public static String getExternalStorageDir(Context context) {
         if (null == context || null == context.getExternalCacheDir())
@@ -37,8 +37,8 @@ public class PathUtils {
     /**
      * 获取内置存储卡路径
      *
-     * @param context
-     * @return
+     * @param context context
+     * @return dir
      */
     public static String getInternalStorageDir(Context context) {
         if (null == context || null == context.getFilesDir())
@@ -50,8 +50,8 @@ public class PathUtils {
     /**
      * 获取app包存储路径
      *
-     * @param context
-     * @return
+     * @param context context
+     * @return dir
      */
     public static String getAppStorageDir(Context context) {
         if (isExternalStorageAvailable())
@@ -64,7 +64,7 @@ public class PathUtils {
      * 从url中提取文件名，取最后一个后缀名
      *
      * @param url url
-     * @return
+     * @return file name
      */
     public static String getFileNameFromUrl(String url) {
         if (TextUtils.isEmpty(url))

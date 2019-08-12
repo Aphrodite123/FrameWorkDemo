@@ -25,8 +25,8 @@ public class NetworkUtils {
     /**
      * 获取当前设备是否能连接到网络
      *
-     * @return true:能连接网络
-     * false:无法连接网络
+     * @param context context
+     * @return false:无法连接网络
      */
     public static boolean isNetworkAvailable(Context context) {
         if (null == context) {
@@ -44,10 +44,8 @@ public class NetworkUtils {
     /**
      * 获取当前网络类型
      *
-     * @return 网络类型
-     * @see #NET_TYPE_WIFI
-     * @see #NET_TYPE_CMWAP
-     * @see #NET_TYPE_CMNET
+     * @param context context
+     * @return NET_TYPE_WIFI, NET_TYPE_CMWAP or NET_TYPE_CMNET
      */
     public static int getNetworkType(Context context) {
         int netType = 0;

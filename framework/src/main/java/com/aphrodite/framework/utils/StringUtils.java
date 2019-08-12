@@ -75,6 +75,7 @@ public class StringUtils {
      *
      * @param src       元字符
      * @param codeRegex 特殊字符正则表达式，可为空
+     * @return 字符
      */
     public static String specialStringFilter(String src, String codeRegex) {
         Matcher matcher = Pattern.compile(codeRegex).matcher(src);
@@ -83,6 +84,9 @@ public class StringUtils {
 
     /**
      * 判断手机格式是否正确
+     *
+     * @param mobiles tell phone number
+     * @return true or false
      */
     public static boolean isMobileNO(String mobiles) {
         Pattern p = Pattern.compile(PHONE_REGEX);
@@ -96,6 +100,7 @@ public class StringUtils {
      *
      * @param src   原字符
      * @param regex 正则
+     * @return true or false
      */
     public static boolean matches(String src, String regex) {
         Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
@@ -109,6 +114,7 @@ public class StringUtils {
      *
      * @param src   原字符
      * @param regex 正则
+     * @return true or false
      */
     public static boolean find(String src, String regex) {
         Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
@@ -119,6 +125,9 @@ public class StringUtils {
 
     /**
      * 判断email格式是否正确
+     *
+     * @param email dest email
+     * @return true or false
      */
     public static boolean isEmail(String email) {
         Pattern p = Pattern.compile(EMAIL_REGEX);
@@ -129,6 +138,9 @@ public class StringUtils {
 
     /**
      * 判断身份证号码格式是否正确
+     *
+     * @param cardNum ID card No.
+     * @return true or false
      */
     public static boolean isIdCardNum(String cardNum) {
         Pattern p = Pattern.compile(ID_CARD_NUM_REGEX);
@@ -150,6 +162,7 @@ public class StringUtils {
      * 判断字符串不为空,如果字符串有值返回true，其他返回false
      *
      * @param str 需要判断是否非空的字符
+     * @return true or false
      */
     public static boolean isNotEmpty(String str) {
         return !(null == str || "".equals(str.trim()) || str.length() <= 0);
@@ -159,6 +172,7 @@ public class StringUtils {
      * 判断字符串不为空,如果字符串有值返回true，其他返回false
      *
      * @param strings 需要判断是否非空的字符
+     * @return true or false
      */
     public static boolean isNotEmpty(String... strings) {
         for (String str : strings) {
@@ -173,6 +187,7 @@ public class StringUtils {
      * 判断字符串为空,如果字符串有值返回true，其他返回false
      *
      * @param str 需要判断是否非空的字符
+     * @return true or false
      */
     public static boolean isEmpty(String str) {
         return null == str || "".equals(str.trim()) || str.length() <= 0;
@@ -181,6 +196,7 @@ public class StringUtils {
     /**
      * Description:显示前3位和@后3位。如12345678@qq.com转换后为：123*****@qq.***
      *
+     * @param email dest email
      * @return String
      */
     public static String formatEmail(String email) {
@@ -240,6 +256,7 @@ public class StringUtils {
     /**
      * Description:校验登录密码格式 (字母、数字或字符至少两种组合)
      *
+     * @param password password
      * @return 是否符合
      */
     public static boolean checkLoginPswFormat(String password) {
@@ -261,8 +278,10 @@ public class StringUtils {
     }
 
     /**
-     * Description:格式化金额，将单位为分的金额格式化为两位小数单位为元的金额<br/>
-     * 如：1(分)->0.01(元)
+     * 格式化金额，将单位为分的金额格式化为两位小数单位为元的金额 如：1分 转换成 0.01元
+     *
+     * @param amt amt
+     * @return format amt
      */
     public static String formatAmtFromFenToYuan(String amt) {
         if (StringUtils.isEmpty(amt)) {
@@ -282,8 +301,10 @@ public class StringUtils {
     }
 
     /**
-     * Description:格式化金额，将单位为厘的金额格式化为两位小数单位为元的金额，舍去厘位<br/>
-     * 如：1(厘)->0.00(元) 123456(厘)->123.45(元)
+     * 格式化金额，将单位为厘的金额格式化为两位小数单位为元的金额，舍去厘位 如：1厘 到 0.00元 123456厘 到 123.45元
+     *
+     * @param amt amt
+     * @return format amt
      */
     public static String formatAmtFromLiToYuan(String amt) {
         if (StringUtils.isEmail(amt)) {
@@ -300,8 +321,10 @@ public class StringUtils {
     }
 
     /**
-     * Description:格式化金额，将单位为元的金额格式化为两位小数单位为元的金额<br/>
-     * 如：1.1元->1.10元
+     * 格式化金额，将单位为元的金额格式化为两位小数单位为元的金额 如：1.1元 到 1.10元
+     *
+     * @param amt amt
+     * @return format amt
      */
     public static String formatAmt(String amt) {
         if (StringUtils.isEmpty(amt)) {
@@ -322,8 +345,10 @@ public class StringUtils {
     }
 
     /**
-     * Description:格式化金额，将单位为元的金额格式化单位为分的整数金额<br/>
-     * 如：0.01(元)->1(分)
+     * 格式化金额，将单位为元的金额格式化单位为分的整数金额 如：0.01元 到 1分
+     *
+     * @param amount amt
+     * @return format amt
      */
     public static String formatAmtFromYuanToFen(String amount) {
         if (StringUtils.isEmpty(amount)) {
@@ -379,11 +404,10 @@ public class StringUtils {
     }
 
     /**
-     * Description:转换阿拉伯数字为汉字
+     * 转换阿拉伯数字为汉字
      *
-     * @param @param  strNum
-     * @param @return
-     * @return String
+     * @param strNum 阿拉伯数字
+     * @return 汉字
      */
     public static String toHanString(String strNum) {
         String result = "";
@@ -411,9 +435,9 @@ public class StringUtils {
     /**
      * 格式化距离单位，根据实际距离格式化为米/公里/千公里/万公里
      *
-     * @param context
-     * @param source
-     * @return
+     * @param context context
+     * @param source  距离
+     * @return 转换后距离单位
      */
     public static String formatDistance(Context context, String source) {
         float distance = parseFloat(source);
@@ -434,8 +458,8 @@ public class StringUtils {
     /**
      * 解析字符串为整型
      *
-     * @param strNum
-     * @return
+     * @param strNum 字符串
+     * @return 整型
      */
     public static int parseInt(String strNum) {
         if (TextUtils.isEmpty(strNum))
@@ -458,8 +482,8 @@ public class StringUtils {
     /**
      * 解析字符串为float
      *
-     * @param strNum
-     * @return
+     * @param strNum 字符串
+     * @return float
      */
     public static float parseFloat(String strNum) {
         if (TextUtils.isEmpty(strNum))
@@ -477,8 +501,8 @@ public class StringUtils {
     /**
      * 解析字符串为double
      *
-     * @param strNum
-     * @return
+     * @param strNum 字符串
+     * @return double
      */
     public static double parseDouble(String strNum) {
         if (TextUtils.isEmpty(strNum))
