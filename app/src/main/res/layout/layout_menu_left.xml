@@ -56,6 +56,18 @@
 
         <View style="@style/divide_line_my_fragment" />
 
+        <TextView
+            android:id="@+id/video_more"
+            style="@style/select_item_view"
+            android:drawableLeft="@drawable/baby_info"
+            android:drawablePadding="@dimen/options_item_icon_right_margin"
+            android:drawableRight="@drawable/arrow_right"
+            android:text="@string/video_more"
+            android:textColor="@color/color_e6000000"
+            android:textSize="@dimen/font13" />
+
+        <View style="@style/divide_line_my_fragment" />
+
     </LinearLayout>
 
 </ScrollView>

@@ -10,13 +10,11 @@ import android.widget.TextView;
 
 import com.aphrodite.demo.R;
 import com.aphrodite.demo.application.FrameApplication;
-import com.aphrodite.demo.model.event.SyncEvent;
 import com.aphrodite.demo.view.activity.base.BaseActivity;
 import com.aphrodite.demo.view.fragment.BeautyListFragment;
 import com.aphrodite.demo.view.fragment.BeautyMoreFragment;
+import com.aphrodite.demo.view.fragment.VideoMoreFragment;
 import com.aphrodite.framework.utils.ToastUtils;
-
-import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 
@@ -27,6 +25,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     LinearLayout mBeautyRecommend;
     @BindView(R.id.beauty_more)
     TextView mBeautyMore;
+    @BindView(R.id.video_more)
+    TextView mVideoMore;
 
     private FragmentManager mFragmentManager;
 
@@ -51,6 +51,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void initListener() {
         mBeautyRecommend.setOnClickListener(this);
         mBeautyMore.setOnClickListener(this);
+        mVideoMore.setOnClickListener(this);
     }
 
     @Override
@@ -85,6 +86,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.beauty_more:
                 mFragmentManager.beginTransaction().replace(R.id.main_content_root, new BeautyMoreFragment()).commit();
                 break;
+            case R.id.video_more:
+                mFragmentManager.beginTransaction().replace(R.id.main_content_root, new VideoMoreFragment()).commit();
             default:
                 break;
         }
