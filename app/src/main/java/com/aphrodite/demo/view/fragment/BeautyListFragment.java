@@ -98,7 +98,7 @@ public class BeautyListFragment extends BaseFragment {
         } catch (FileNotFoundException e) {
             LogUtils.e("Enter loadLocalData method.FileNotFoundException: " + e);
         }
-        mRetrofitInit = FrameApplication.getApplication().getRetrofitInit(true, BuildConfig.SERVER_URL);
+        mRetrofitInit = FrameApplication.getApplication().getRetrofitInit(true, BuildConfig.SERVER_URL, null);
         mRequestApi = mRetrofitInit.getRetrofit().create(RequestApi.class);
 
         showLoadingDialog();

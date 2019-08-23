@@ -108,7 +108,7 @@ public class RecommendListFragment extends BaseFragment {
             mUrl = bundle.getString(AppConfig.IntentKey.RECOMMEND_PAGE_URL);
         }
 
-        mRetrofitInit = FrameApplication.getApplication().getRetrofitInit(false, BuildConfig.SERVER_URL);
+        mRetrofitInit = FrameApplication.getApplication().getRetrofitInit(false, BuildConfig.SERVER_URL, null);
         mRequestApi = mRetrofitInit.getRetrofit().create(RequestApi.class);
 
         queryContent();

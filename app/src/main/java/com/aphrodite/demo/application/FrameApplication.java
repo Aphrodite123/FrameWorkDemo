@@ -9,6 +9,7 @@ import com.aphrodite.demo.application.base.BaseApplication;
 import com.aphrodite.demo.model.database.migration.GlobalRealmMigration;
 import com.aphrodite.demo.utils.LogUtils;
 import com.aphrodite.framework.model.network.api.RetrofitInitial;
+import com.aphrodite.framework.model.network.interceptor.BaseCommonParamInterceptor;
 import com.aphrodite.framework.utils.ToastUtils;
 import com.facebook.stetho.Stetho;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -72,12 +73,13 @@ public class FrameApplication extends BaseApplication {
         return 0 == mActivityCount;
     }
 
-    public RetrofitInitial getRetrofitInit(boolean isJson, String baseUrl) {
+    public RetrofitInitial getRetrofitInit(boolean isJson, String baseUrl, BaseCommonParamInterceptor paramInterceptor) {
         RetrofitInitial retrofitInitial = new RetrofitInitial
                 .Builder()
                 .with(getApplication())
                 .isJson(isJson)
                 .baseUrl(baseUrl)
+                .commonParamInterceptor(paramInterceptor)
                 .build();
         return retrofitInitial;
     }

@@ -92,7 +92,7 @@ public class BeautyMoreFragment extends BaseFragment {
             LogUtils.e("Enter initData method.FileNotFoundException: " + e);
         }
 
-        mRetrofitInit = FrameApplication.getApplication().getRetrofitInit(false, BuildConfig.SERVER_URL);
+        mRetrofitInit = FrameApplication.getApplication().getRetrofitInit(false, BuildConfig.SERVER_URL, null);
         mRequestApi = mRetrofitInit.getRetrofit().create(RequestApi.class);
         mFragmentList = new ArrayList<>();
 

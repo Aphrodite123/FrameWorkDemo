@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.aphrodite.framework.model.network.interceptor.BaseHeaderInterceptor;
 import com.aphrodite.framework.model.network.interceptor.BaseResponseInterceptor;
+import com.aphrodite.framework.model.network.interceptor.BaseCommonParamInterceptor;
 import com.aphrodite.framework.utils.PathUtils;
 import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
@@ -12,6 +13,8 @@ import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
@@ -31,6 +34,7 @@ public class RetrofitInitial {
     private CookieJar mCookieJar;
     private boolean mRetryConnect = false;
     private BaseHeaderInterceptor mHeaderInterceptor;
+    private BaseCommonParamInterceptor mBaseCommonParamInterceptor;
     private BaseResponseInterceptor mResponseInterceptor;
     private long maxCacheSize;
     private OkHttpClient.Builder mOkHttpBuilder;
@@ -53,6 +57,7 @@ public class RetrofitInitial {
         this.mContext = builder.mContext;
         this.mCookieJar = builder.mCookieJar;
         this.mHeaderInterceptor = builder.mHeaderInterceptor;
+        this.mBaseCommonParamInterceptor = builder.mBaseCommonParamInterceptor;
         this.mResponseInterceptor = builder.mResponseInterceptor;
         this.maxCacheSize = builder.maxCacheSize;
         this.mOkHttpBuilder = builder.mOkHttpBuilder;
@@ -77,9 +82,20 @@ public class RetrofitInitial {
             }
 
             if (null == mHeaderInterceptor) {
-                mHeaderInterceptor = new BaseHeaderInterceptor();
+                //默认请求header
+                Map<String, String> header = new HashMap<>();
+                header.put("User-Agent", "Android, xxx");
+                header.put("Accept", "*/*");
+                header.put("Content-type", "application/json");
+
+                mHeaderInterceptor = new BaseHeaderInterceptor(header);
             }
             mOkHttpBuilder.addInterceptor(mHeaderInterceptor);
+
+            if (null == mBaseCommonParamInterceptor) {
+                mBaseCommonParamInterceptor = new BaseCommonParamInterceptor();
+            }
+            mOkHttpBuilder.addInterceptor(mBaseCommonParamInterceptor);
 
             if (null == mResponseInterceptor) {
                 mResponseInterceptor = new BaseResponseInterceptor();
@@ -117,6 +133,7 @@ public class RetrofitInitial {
         private Context mContext;
         private CookieJar mCookieJar;
         private BaseHeaderInterceptor mHeaderInterceptor;
+        private BaseCommonParamInterceptor mBaseCommonParamInterceptor;
         private BaseResponseInterceptor mResponseInterceptor;
         private long maxCacheSize = 10 * 1024 * 1024;
         private OkHttpClient.Builder mOkHttpBuilder;
@@ -141,6 +158,11 @@ public class RetrofitInitial {
 
         public Builder headerInterceptor(BaseHeaderInterceptor headerInterceptor) {
             this.mHeaderInterceptor = headerInterceptor;
+            return this;
+        }
+
+        public Builder commonParamInterceptor(BaseCommonParamInterceptor baseCommonParamInterceptor) {
+            this.mBaseCommonParamInterceptor = baseCommonParamInterceptor;
             return this;
         }
 
