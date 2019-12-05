@@ -16,11 +16,13 @@ import okhttp3.Response;
  */
 public class BaseCommonParamInterceptor implements Interceptor {
     protected Map<String, String> mParams = new HashMap<>();
+    protected Map<String, String> mBody = new HashMap<>();
 
     public BaseCommonParamInterceptor() {
     }
 
     public BaseCommonParamInterceptor(Map<String, String> body, Map<String, String> params) {
+        this.mBody = body;
         this.mParams = params;
     }
 
@@ -32,7 +34,7 @@ public class BaseCommonParamInterceptor implements Interceptor {
 
         Request originalRequest = chain.request();
         HttpUrl.Builder builder = originalRequest.url().newBuilder();
-        if ("POST".equals(originalRequest.method())) {
+        if ("POST".equals(originalRequest.method()) && !ObjectUtils.isEmpty(mBody)) {
             for (Map.Entry<String, String> entry : mBody.entrySet()) {
                 if (null == entry) {
                     continue;

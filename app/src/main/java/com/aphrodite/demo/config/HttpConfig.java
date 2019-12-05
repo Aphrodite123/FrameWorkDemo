@@ -23,5 +23,5 @@ public class HttpConfig extends BaseConfig {
      */
     public static final int DEFAULT_TIMEOUT = 1000;
 
-    public static final String URL_MORE_BEAUTY = "https://www.dbmeinv.com/index.htm";
+    public static final String URL_MORE_BEAUTY = "https://www.buxiuse.com/";
 }

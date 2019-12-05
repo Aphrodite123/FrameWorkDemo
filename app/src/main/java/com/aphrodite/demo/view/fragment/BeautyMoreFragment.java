@@ -146,16 +146,31 @@ public class BeautyMoreFragment extends BaseFragment {
 
     private void parseTypes(String response) {
         Document document = Jsoup.parse(response);
-        Elements elements = document.select("a[href~=^https://www.dbmeinv.com/index.htm]");
+        Elements elements = document.select("ul[class=nav nav-pills]");
+        if (ObjectUtils.isEmpty(elements)) {
+            return;
+        }
+
+        Elements liElements = elements.select("li");
+        if (ObjectUtils.isEmpty(liElements)) {
+            return;
+        }
+
         mTypeBeans = new ArrayList<>();
-        for (Element element : elements) {
-            if (null == element) {
+        Elements hrefElements = null;
+        for (Element element : liElements) {
+            if (ObjectUtils.isEmpty(element)) {
+                continue;
+            }
+
+            hrefElements = element.select("a[href~=^https://www.buxiuse.com]");
+            if (ObjectUtils.isEmpty(hrefElements)) {
                 continue;
             }
 
             RecommendTypeBean typeBean = new RecommendTypeBean();
-            typeBean.setName(element.childNode(0).toString());
-            typeBean.setUrl(element.attr("href").toString());
+            typeBean.setName(hrefElements.get(0).text());
+            typeBean.setUrl(hrefElements.attr("href").toString());
 
             mTypeBeans.add(typeBean);
         }
