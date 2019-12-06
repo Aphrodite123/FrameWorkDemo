@@ -1,7 +1,7 @@
 # FrameWorkDemo
 Help developers quickly build a simple project framework. 
 
-[ ![Download](https://api.bintray.com/packages/aphrodite/maven/framework-base/images/download.svg?version=1.0.2) ](https://bintray.com/aphrodite/maven/framework-base/1.0.2/link)
+[ ![Download](https://api.bintray.com/packages/aphrodite/maven/framework-base/images/download.svg?version=1.0.3) ](https://bintray.com/aphrodite/maven/framework-base/1.0.3/link)
 
 ## Dependency
 
@@ -20,7 +20,7 @@ Then, add the library to your module `build.gradle`
 
 ```gradle
 dependencies {  
-    implementation 'com.aphrodite.framework:framework-base:1.0.2'
+    implementation 'com.aphrodite.framework:framework-base:1.0.3'
 }
 ```
 
