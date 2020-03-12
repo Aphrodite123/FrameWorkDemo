@@ -38,7 +38,7 @@ public class SharePreferencesUtils {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(mSharePrefPame, Context.MODE_PRIVATE);
         Editor editor = sharedPreferences.edit();
         editor.putString(key, value);
-        editor.commit();
+        editor.apply();
     }
 
     /**
@@ -86,7 +86,7 @@ public class SharePreferencesUtils {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(mSharePrefPame, Context.MODE_PRIVATE);
         Editor editor = sharedPreferences.edit();
         editor.putInt(key, value);
-        editor.commit();
+        editor.apply();
     }
 
     /**
@@ -134,7 +134,7 @@ public class SharePreferencesUtils {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(mSharePrefPame, Context.MODE_PRIVATE);
         Editor editor = sharedPreferences.edit();
         editor.putLong(key, value);
-        editor.commit();
+        editor.apply();
     }
 
     /**
@@ -182,7 +182,7 @@ public class SharePreferencesUtils {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(mSharePrefPame, Context.MODE_PRIVATE);
         Editor editor = sharedPreferences.edit();
         editor.putBoolean(key, value);
-        editor.commit();
+        editor.apply();
     }
 
     /**
@@ -229,7 +229,7 @@ public class SharePreferencesUtils {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(mSharePrefPame, Context.MODE_PRIVATE);
         Editor editor = sharedPreferences.edit();
         editor.remove(key);
-        editor.commit();
+        editor.apply();
     }
 
     /**
@@ -243,6 +243,6 @@ public class SharePreferencesUtils {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(mSharePrefPame, Context.MODE_PRIVATE);
         Editor editor = sharedPreferences.edit();
         editor.clear();
-        editor.commit();
+        editor.apply();
     }
 }
