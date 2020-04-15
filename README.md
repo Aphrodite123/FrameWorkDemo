@@ -10,8 +10,7 @@ Add this in your root `build.gradle` file (not your module `build.gradle` file):
 ```gradle
 allprojects {  
         repositories {  
-             mavenLocal()  
-             maven { url "https://jitpack.io" }
+             maven { url "https://dl.bintray.com/aphrodite/maven" }
         }
 }
 ```
