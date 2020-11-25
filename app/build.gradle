@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.aphrodite.demo"
         minSdkVersion 19
@@ -70,6 +70,7 @@ android {
     lintOptions {
         abortOnError false
     }
+    buildToolsVersion '28.0.3'
 
 }
 

@@ -37,7 +37,7 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
-                <action android:name="com.jiqid.ipen.view.BEAUTYDETAILS" />
+                <action android:name="com.aphrodite.demo.view.BEAUTYDETAILS" />
             </intent-filter>
         </activity>
 

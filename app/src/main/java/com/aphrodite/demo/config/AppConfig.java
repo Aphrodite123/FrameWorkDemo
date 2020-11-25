@@ -1,11 +1,14 @@
 package com.aphrodite.demo.config;
 
+import com.aphrodite.demo.BuildConfig;
 import com.aphrodite.framework.config.base.BaseConfig;
 
 /**
  * Created by Aphrodite on 2019/5/28.
  */
 public class AppConfig extends BaseConfig {
+    public static String PACKAGE_NAME = BuildConfig.APPLICATION_ID;
+
     public interface IntentKey {
         String RECOMMEND_PAGE_URL = "recommend_page_url";
     }
