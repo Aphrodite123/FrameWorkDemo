@@ -15,14 +15,14 @@ import java.math.BigDecimal;
  * Glide缓存工具类
  * Created by Trojx on 2016/10/10 0010.
  */
-public class GlideCacheUtil {
-    private static GlideCacheUtil inst;
+public class GlideCacheUtils {
+    private static GlideCacheUtils sInstance;
 
-    public static GlideCacheUtil getInstance() {
-        if (inst == null) {
-            inst = new GlideCacheUtil();
+    public static GlideCacheUtils getInstance() {
+        if (sInstance == null) {
+            sInstance = new GlideCacheUtils();
         }
-        return inst;
+        return sInstance;
     }
 
     /**
@@ -151,7 +151,6 @@ public class GlideCacheUtil {
      * @return size
      */
     private static String getFormatSize(double size) {
-
         double kiloByte = size / 1024;
         if (kiloByte < 1) {
             return size + "Byte";

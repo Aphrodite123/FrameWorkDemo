@@ -18,9 +18,9 @@ public class UrlUtils {
      * @return dest url
      */
     public static String appendParams(String url, Map<String, String> params) {
-        if (StrUtils.isBlank(url)) {
+        if (StringUtils.isBlank(url)) {
             return "";
-        } else if (StrUtils.isEmptyMap(params)) {
+        } else if (ObjectUtils.isEmpty(params)) {
             return url.trim();
         } else {
             StringBuffer sb = new StringBuffer("");
@@ -55,9 +55,9 @@ public class UrlUtils {
      * @return dest url
      */
     public static String appendParam(String url, String name, String value) {
-        if (StrUtils.isBlank(url)) {
+        if (StringUtils.isBlank(url)) {
             return "";
-        } else if (StrUtils.isBlank(name)) {
+        } else if (StringUtils.isBlank(name)) {
             return url.trim();
         } else {
             Map<String, String> params = new HashMap<String, String>();
@@ -74,9 +74,9 @@ public class UrlUtils {
      * @return result
      */
     public static String removeParams(String url, String... paramNames) {
-        if (StrUtils.isBlank(url)) {
+        if (StringUtils.isBlank(url)) {
             return "";
-        } else if (StrUtils.isEmptyArray(paramNames)) {
+        } else if (ObjectUtils.isEmpty(paramNames)) {
             return url.trim();
         } else {
             url = url.trim();
@@ -89,10 +89,10 @@ public class UrlUtils {
                     String baseUrl = url.substring(0, index);
                     String paramsString = url.substring(index + 1);
                     String[] params = paramsString.split("&");
-                    if (!StrUtils.isEmptyArray(params)) {
+                    if (StringUtils.isNotEmpty(params)) {
                         Map<String, String> paramsMap = new HashMap<String, String>();
                         for (String param : params) {
-                            if (!StrUtils.isBlank(param)) {
+                            if (!StringUtils.isBlank(param)) {
                                 String[] oneParam = param.split("=");
                                 String paramName = oneParam[0];
                                 int count = 0;
@@ -107,7 +107,7 @@ public class UrlUtils {
                                 }
                             }
                         }
-                        if (!StrUtils.isEmptyMap(paramsMap)) {
+                        if (!ObjectUtils.isEmpty(paramsMap)) {
                             StringBuffer paramBuffer = new StringBuffer(baseUrl);
                             paramBuffer.append("?");
                             Set<String> set = paramsMap.keySet();

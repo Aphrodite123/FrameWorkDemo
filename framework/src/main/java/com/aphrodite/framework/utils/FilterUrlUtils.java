@@ -50,8 +50,7 @@ public class FilterUrlUtils {
      *
      * @param interceptExternalProtocol 是否拦截自定义的外部协议，true：拦截，无论如何都不让浏览器处理；false：不拦截，如果没有成功处理该协议，继续让浏览器处理
      */
-    private boolean shouldOverrideUrlLoadingByAppInternal(WebView view, String url, boolean
-            interceptExternalProtocol) throws URISyntaxException, ActivityNotFoundException {
+    private boolean shouldOverrideUrlLoadingByAppInternal(WebView view, String url, boolean interceptExternalProtocol) throws URISyntaxException, ActivityNotFoundException {
         if (isAcceptedScheme(url)) return false;
 
         Intent intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);

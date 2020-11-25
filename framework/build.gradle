@@ -11,13 +11,12 @@ publish {
     userOrg = 'aphrodite'//bintray.com用户名
     groupId = 'com.aphrodite.framework'//jcenter上的路径,bintray上创建Package时填写的Version control项
     artifactId = 'framework-base'//项目名称，bintray上创建Package时填写的Name项
-    publishVersion = '1.0.5'//版本号
+    publishVersion = '1.0.6'//版本号
     desc = 'This is Android base framework.'//描述，不重要
     website = 'https://github.com/novoda/${rootProject.name}'//网站，最好有，不重要
 }
 
 android {
-
     compileSdkVersion dependAndroid["compileSdkVersion"]
     defaultConfig {
         buildToolsVersion dependAndroid["buildToolsVersion"]
@@ -60,4 +59,8 @@ dependencies {
     api dependVersion["rxjava2-adapter"]
     api dependVersion["converter-scalars"]
     api dependVersion["persistentCookieJar"]
+    /**
+     * Logger
+     */
+    api dependVersion["logger"]
 }

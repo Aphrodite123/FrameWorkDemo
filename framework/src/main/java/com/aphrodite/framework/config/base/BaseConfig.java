@@ -2,16 +2,18 @@ package com.aphrodite.framework.config.base;
 
 import android.os.Environment;
 
+import com.aphrodite.framework.BuildConfig;
+
 import java.io.File;
 
 /**
  * Created by Aphrodite on 2018/7/26.
  */
 public class BaseConfig {
-    public static final String PACKAGE_NAME = "com.jiqid.ipen";
+    public static String PACKAGE_NAME = BuildConfig.APPLICATION_ID;
 
     public static final String SDCARD_PATH = Environment.getExternalStorageDirectory().getPath() + File.separator;
-    public static final String ROOT_PATH = SDCARD_PATH + "ipen" + File.separator;
+    public static final String ROOT_PATH = SDCARD_PATH + PACKAGE_NAME + File.separator;
 
     /**
      * 图片缓存文件夹

@@ -1,8 +1,6 @@
-package com.aphrodite.framework.utils;
+package com.aphrodite.framework.utils.base64;
 
 import android.text.TextUtils;
-
-import com.aphrodite.framework.utils.base64.Base64;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
@@ -17,7 +15,6 @@ import javax.crypto.spec.SecretKeySpec;
  */
 
 public class HMACSHA1 {
-
     private static final String ALG_NAME = "HmacSHA1";
     private static final String ENCODING = "UTF-8";
 

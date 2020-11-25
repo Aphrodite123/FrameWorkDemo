@@ -23,7 +23,6 @@ import java.util.zip.ZipInputStream;
  * Author:       zhangjingming
  * Date:         2016-07-14
  */
-
 public class FolderUtils {
     /**
      * 删除文件夹内容
@@ -63,21 +62,22 @@ public class FolderUtils {
      * @param fileName   文件路径
      */
     public static void deleteOtherFile(String folderPath, String fileName) {
-        if (!TextUtils.isEmpty(fileName)) {
-            try {
-                File file = new File(folderPath);
-                if (file.isDirectory()) { // 处理目录
-                    File files[] = file.listFiles();
-                    for (int i = 0; i < files.length; i++) {
-                        if (files[i].getAbsolutePath().contains(fileName)) {
-                            continue;
-                        }
-                        deleteOtherFile(files[i].getAbsolutePath(), fileName);
+        if (TextUtils.isEmpty(fileName)) {
+            return;
+        }
+        try {
+            File file = new File(folderPath);
+            if (file.isDirectory()) { // 处理目录
+                File files[] = file.listFiles();
+                for (int i = 0; i < files.length; i++) {
+                    if (files[i].getAbsolutePath().contains(fileName)) {
+                        continue;
                     }
+                    deleteOtherFile(files[i].getAbsolutePath(), fileName);
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -161,13 +161,13 @@ public class FolderUtils {
      * 解压文件
      *
      * @param zipFilename zip file
-     * @param outPath out file
+     * @param outPath     out file
      * @return return false
      */
     public static boolean unzipFolder(String zipFilename, String outPath) {
-        if (!FileUtils.isFileExist(zipFilename) || TextUtils.isEmpty(outPath))
+        if (!FileUtils.isFileExist(zipFilename) || TextUtils.isEmpty(outPath)) {
             return false;
-
+        }
         FileUtils.makeDirs(outPath);
         FileOutputStream fos = null;
         ZipInputStream zis = null;
@@ -243,7 +243,7 @@ public class FolderUtils {
 
             } else//如果当前项为文件则进行文件拷贝
             {
-                CopySdcardFile(currentFiles[i].getPath(), toFile + currentFiles[i].getName());
+                copySdcardFile(currentFiles[i].getPath(), toFile + currentFiles[i].getName());
             }
         }
         return true;
@@ -254,10 +254,10 @@ public class FolderUtils {
      * 要复制的目录下的所有非子目录(文件夹)文件拷贝
      *
      * @param fromFile from file
-     * @param toFile to file
+     * @param toFile   to file
      * @return return false
      */
-    public static boolean CopySdcardFile(String fromFile, String toFile) {
+    public static boolean copySdcardFile(String fromFile, String toFile) {
         try {
             InputStream fosfrom = new FileInputStream(fromFile);
             OutputStream fosto = new FileOutputStream(toFile);
