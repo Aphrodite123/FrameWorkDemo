@@ -3,11 +3,13 @@ package com.aphrodite.demo.view.widget.imageview;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import androidx.appcompat.widget.AppCompatImageView;
+
 /**
  * Created by cl on 2018/5/3.
  */
 
-public class ScaleImageView extends android.support.v7.widget.AppCompatImageView {
+public class ScaleImageView extends AppCompatImageView {
     private int mWidth;
     private int mHeight;
 

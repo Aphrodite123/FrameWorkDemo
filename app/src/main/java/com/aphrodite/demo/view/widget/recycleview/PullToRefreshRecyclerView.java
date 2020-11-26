@@ -4,10 +4,6 @@ import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
-import android.support.v4.view.MotionEventCompat;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,6 +24,11 @@ import com.aphrodite.demo.view.widget.recycleview.inter.OnRefreshListener;
 import com.aphrodite.demo.view.widget.recycleview.inter.RefreshTrigger;
 import com.aphrodite.demo.view.widget.recycleview.inter.SimpleAnimatorListener;
 import com.aphrodite.demo.view.widget.recycleview.view.RefreshHeaderLayout;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.Nullable;
+import androidx.core.view.MotionEventCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by aspsine on 16/3/3.

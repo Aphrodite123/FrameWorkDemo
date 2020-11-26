@@ -1,7 +1,6 @@
 package com.aphrodite.demo.view.activity;
 
 import android.content.Intent;
-import android.support.v4.view.ViewPager;
 import android.widget.TextView;
 
 import com.aphrodite.demo.R;
@@ -21,6 +20,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import io.realm.Realm;
 import io.realm.RealmResults;

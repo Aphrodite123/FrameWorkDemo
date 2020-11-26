@@ -1,13 +1,14 @@
 package com.aphrodite.framework.view.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 
 import com.aphrodite.framework.utils.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by Aphrodite on 2019/5/22.

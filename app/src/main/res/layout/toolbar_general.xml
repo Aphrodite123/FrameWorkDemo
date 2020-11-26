@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="@dimen/toolbar_title_height">
@@ -26,10 +26,10 @@
         android:background="?android:attr/selectableItemBackground"
         android:gravity="center_vertical"
         android:onClick="clickLeftText"
-        android:paddingBottom="@dimen/dip7"
         android:paddingLeft="@dimen/dip10"
-        android:paddingRight="@dimen/dip10"
         android:paddingTop="@dimen/dip7"
+        android:paddingRight="@dimen/dip10"
+        android:paddingBottom="@dimen/dip7"
         android:textColor="@android:color/white"
         android:textSize="@dimen/font12"
         android:visibility="gone" />
@@ -121,11 +121,11 @@
         android:drawablePadding="@dimen/dip5"
         android:gravity="center_vertical"
         android:onClick="clickRightText"
-        android:paddingBottom="@dimen/dip7"
         android:paddingLeft="@dimen/dip10"
-        android:paddingRight="@dimen/dip10"
         android:paddingTop="@dimen/dip7"
+        android:paddingRight="@dimen/dip10"
+        android:paddingBottom="@dimen/dip7"
         android:textColor="@android:color/white"
         android:textSize="@dimen/font12"
         android:visibility="gone" />
-</android.support.v7.widget.Toolbar>
+</androidx.appcompat.widget.Toolbar>

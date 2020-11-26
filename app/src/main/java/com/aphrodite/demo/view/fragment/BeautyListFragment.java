@@ -2,7 +2,6 @@ package com.aphrodite.demo.view.fragment;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
 
 import com.aphrodite.demo.BuildConfig;
@@ -31,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import butterknife.BindView;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -160,12 +160,10 @@ public class BeautyListFragment extends BaseFragment {
                         }
 
                         Bitmap bitmap = null;
-
                         try {
                             bitmap = Glide.with(getContext())
-                                    .load(url)
                                     .asBitmap()
-                                    .crossFade()
+                                    .load(url)
                                     .skipMemoryCache(true)
                                     .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
                                     .get();

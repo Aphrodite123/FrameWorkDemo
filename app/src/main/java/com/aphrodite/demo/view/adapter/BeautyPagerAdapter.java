@@ -1,7 +1,6 @@
 package com.aphrodite.demo.view.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -13,6 +12,8 @@ import com.aphrodite.framework.view.adapter.BasePagerAdapter;
 import com.aphrodite.framework.view.widget.photoview.PhotoView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import androidx.annotation.NonNull;
 
 /**
  * Created by Aphrodite on 2019/5/27.
@@ -64,19 +65,19 @@ public class BeautyPagerAdapter<T> extends BasePagerAdapter {
             BeautyBean bean = (BeautyBean) t;
 
             Glide.with(mContext)
-                    .load(bean.getUrl())
                     .asBitmap()
+                    .load(bean.getUrl())
                     .placeholder(R.drawable.icon_beauty_default)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .dontAnimate()
                     .into(mPhotoView);
         } else if (t instanceof RecommendContentBean) {
             RecommendContentBean contentBean = (RecommendContentBean) t;
             Glide.with(mContext)
-                    .load(contentBean.getUrl())
                     .asBitmap()
+                    .load(contentBean.getUrl())
                     .placeholder(R.drawable.icon_beauty_default)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .dontAnimate()
                     .into(mPhotoView);
         }

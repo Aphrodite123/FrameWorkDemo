@@ -1,7 +1,7 @@
-apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 
 apply plugin: 'maven'
-apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'com.android.library'
 
 def dependAndroid = rootProject.ext.android
 def dependVersion = rootProject.ext.dependVersion
@@ -34,8 +34,8 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation dependVersion["junit"]
-    api dependVersion["design"]
-    api dependVersion["appcompat-v7"]
+    api dependVersion["material"]
+    api dependVersion["appcompat"]
     /**
      * Glide
      */

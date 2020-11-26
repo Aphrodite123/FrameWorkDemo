@@ -2,7 +2,6 @@ package com.aphrodite.demo.view.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,7 @@ import com.aphrodite.framework.view.adapter.BaseRecyclerAdapter;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -51,10 +51,10 @@ public class BeautyListAdapter<T> extends BaseRecyclerAdapter<T, BeautyListAdapt
             holder.mItemIV.setSize(bean.getWidth(), bean.getHeight());
 
             Glide.with(mContext)
-                    .load(bean.getUrl())
                     .asBitmap()
+                    .load(bean.getUrl())
                     .placeholder(R.drawable.icon_beauty_default)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .dontAnimate()
                     .into(holder.mItemIV);
 
@@ -77,10 +77,10 @@ public class BeautyListAdapter<T> extends BaseRecyclerAdapter<T, BeautyListAdapt
             holder.mItemIV.setSize(bean.getWidth(), bean.getHeight());
 
             Glide.with(mContext)
-                    .load(bean.getUrl())
                     .asBitmap()
+                    .load(bean.getUrl())
                     .placeholder(R.drawable.icon_beauty_default)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .dontAnimate()
                     .into(holder.mItemIV);
 

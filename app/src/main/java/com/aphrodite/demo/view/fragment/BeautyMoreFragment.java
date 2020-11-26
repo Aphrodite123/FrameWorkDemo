@@ -2,8 +2,6 @@ package com.aphrodite.demo.view.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
 
 import com.aphrodite.demo.BuildConfig;
 import com.aphrodite.demo.R;
@@ -31,6 +29,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;

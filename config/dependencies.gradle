@@ -1,12 +1,12 @@
 def junitVersion = "4.12"
-def supportVersion = "27.0.2"
-def constraintVersion = "1.0.2"
+def supportVersion = "1.0.0"
+def constraintVersion = "1.1.3"
 def rxJavaVersion = "2.1.9"
 def rxAndroidVersion = "2.0.1"
 def okhttpVersion = "3.9.1"
 def okhttpOkioVersion = "1.9.0"
 def retrofitVersion = "2.5.0"
-def glideVersion = "3.8.0"
+def glideVersion = "4.9.0"
 def scalarsVersion = "2.5.0"
 def persistentCookieJarVersion = "v1.0.1"
 def loggerVersion = "2.2.0"
@@ -22,10 +22,9 @@ project.ext {
     dependVersion = [
             "junit"              : "junit:junit:${junitVersion}",
 
-            "appcompat-v7"       : "com.android.support:appcompat-v7:${supportVersion}",
-            "design"             : "com.android.support:design:${supportVersion}",
-            "cardview"           : "com.android.support:cardview-v7:${supportVersion}",
-            "constraint-layout"  : "com.android.support.constraint:constraint-layout:${constraintVersion}",
+            "material"           : "com.google.android.material:material:${supportVersion}",
+            "appcompat"          : "androidx.appcompat:appcompat:${supportVersion}",
+            "constraint-layout"  : "androidx.constraintlayout:constraintlayout:${constraintVersion}",
 
             "rxjava"             : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
             "rxandroid"          : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",

@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "com.aphrodite.demo"
         minSdkVersion 19
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -58,20 +58,20 @@ android {
 
     //自定义APK名称,多渠道打包
     applicationVariants.all { variant ->
-        variant.outputs.all { output ->  // each 改为 all
-            def fileName = "启蒙v" + defaultConfig.versionName + ".apk"
-            def outFile = output.outputFile
-            if (outFile != null && outFile.name.endsWith('.apk')) {
-                outputFileName = fileName  //  output.outputFile 改为 outputFileName
-            }
+        variant.outputs.all {
+            outputFileName = "启蒙v" + defaultConfig.versionName + "_" + buildType.name + ".apk"
         }
+    }
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
     }
 
     lintOptions {
         abortOnError false
     }
     buildToolsVersion '28.0.3'
-
 }
 
 dependencies {
@@ -88,9 +88,8 @@ dependencies {
     /**
      * 注解框架
      */
-    implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    implementation 'com.jakewharton.rxbinding:rxbinding:0.4.0'
+    implementation 'com.jakewharton:butterknife:10.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
     /**
      * Stetho调试 Realm
      */
