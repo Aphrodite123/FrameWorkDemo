@@ -135,9 +135,7 @@ public class UIUtils {
      */
     public static PowerManager.WakeLock KeepScreenOn(Context context) {
         PowerManager manager = ((PowerManager) context.getSystemService(Context.POWER_SERVICE));
-        PowerManager.WakeLock wakeLock =
-                manager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK |
-                        PowerManager.ON_AFTER_RELEASE, "ATAAW");
+        PowerManager.WakeLock wakeLock = manager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ON_AFTER_RELEASE, "aphrodite:light");
         wakeLock.acquire();
         return wakeLock;
     }
