@@ -9,13 +9,13 @@ import java.util.List;
  * Created by Aphrodite on 2019/5/20.
  */
 public class BeautyResponse extends BaseResponse {
-    private List<BeautyBean> results;
+    private List<BeautyBean> data;
 
-    public List<BeautyBean> getResults() {
-        return results;
+    public List<BeautyBean> getData() {
+        return data;
     }
 
-    public void setResults(List<BeautyBean> results) {
-        this.results = results;
+    public void setData(List<BeautyBean> data) {
+        this.data = data;
     }
 }

@@ -57,7 +57,7 @@ public class BeautyListFragment extends BaseFragment {
     private RetrofitInitial mRetrofitInit;
     private RequestApi mRequestApi;
 
-    private int mDefaultCount = 20;
+    private int mDefaultCount = 50;
     private int mPageNo = 1;
 
     private List<BeautyBean> mBeautyBeans;
@@ -137,7 +137,7 @@ public class BeautyListFragment extends BaseFragment {
                         if (null == beautyResponse) {
                             return null;
                         }
-                        return beautyResponse.getResults();
+                        return beautyResponse.getData();
                     }
                 })
                 .flatMap(new Function<List<BeautyBean>, ObservableSource<BeautyBean>>() {

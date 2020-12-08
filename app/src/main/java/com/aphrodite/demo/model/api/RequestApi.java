@@ -27,7 +27,7 @@ import retrofit2.http.Url;
  * Created by Aphrodite on 2019/4/23.
  */
 public interface RequestApi {
-    @GET("http://gank.io/api/data/福利/{count}/{page}")
+    @GET("https://gank.io/api/v2/data/category/Girl/type/Girl/page/{page}/count/{count}")
     Observable<BeautyResponse> queryBeauty(
             @Path("count") int count,
             @Path("page") int page
