@@ -18,6 +18,7 @@ public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+        super.getItemOffsets(outRect, view, parent, state);
         //根据params.getSpanIndex()来判断左右边确定分割线第一列设置左边距为space，右边距为space/2（第二列反之）
         StaggeredGridLayoutManager.LayoutParams params = (StaggeredGridLayoutManager.LayoutParams) view.getLayoutParams();
         if (0 == parent.getChildAdapterPosition(view)) {

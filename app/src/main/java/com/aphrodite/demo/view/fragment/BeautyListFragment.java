@@ -23,13 +23,16 @@ import com.aphrodite.framework.model.network.api.RetrofitInitial;
 import com.aphrodite.framework.utils.NetworkUtils;
 import com.aphrodite.framework.utils.UrlUtils;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import butterknife.BindView;
 import io.reactivex.Observable;
@@ -153,33 +156,28 @@ public class BeautyListFragment extends BaseFragment {
                         if (null == beautyBean) {
                             return null;
                         }
-
                         String url = beautyBean.getUrl().trim();
                         if (TextUtils.isEmpty(url) || !UrlUtils.checkUrl(url)) {
                             return null;
                         }
-
-                        Bitmap bitmap = null;
-                        try {
-                            bitmap = Glide.with(getContext())
-                                    .asBitmap()
-                                    .load(url)
-                                    .skipMemoryCache(true)
-                                    .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-                                    .get();
-                            if (null != bitmap) {
-                                int width = bitmap.getWidth();
-                                int height = bitmap.getHeight();
-                                beautyBean.setWidth(width);
-                                beautyBean.setHeight(height);
-                            }
-                        } catch (ExecutionException e) {
-                            LogUtils.e("Enter queryBeauty method." + e);
-                            return beautyBean;
-                        } finally {
-                            bitmap.recycle();
-                            bitmap = null;
-                        }
+                        Glide.with(getContext())
+                                .asBitmap()
+                                .load("https://ae01.alicdn.com/kf/U76a18e0d315e407a8daf3d91de033e31i.jpg")
+                                .skipMemoryCache(true)                      //禁止Glide内存缓存
+                                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)  //不缓存资源
+                                .into(new SimpleTarget<Bitmap>() {
+                                    @Override
+                                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                                        float width = resource.getWidth();
+                                        float height = resource.getHeight();
+                                        LogUtils.i("Query image size. " + width + " , " + height);
+                                        beautyBean.setWidth(resource.getWidth());
+                                        beautyBean.setHeight(resource.getHeight());
+                                        beautyBean.setScale(width / height);
+                                        beautyBean.setUrl("https://ae01.alicdn.com/kf/U76a18e0d315e407a8daf3d91de033e31i.jpg");
+                                    }
+                                });
+                        LogUtils.i("Return image size.");
                         return beautyBean;
                     }
                 })

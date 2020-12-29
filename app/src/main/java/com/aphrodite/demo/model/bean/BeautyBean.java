@@ -22,6 +22,7 @@ public class BeautyBean implements Parcelable {
     private String who;
     private int width;
     private int height;
+    private float scale;
 
     public BeautyBean() {
     }
@@ -38,6 +39,7 @@ public class BeautyBean implements Parcelable {
         who = in.readString();
         width = in.readInt();
         height = in.readInt();
+        scale = in.readFloat();
     }
 
     @Override
@@ -52,6 +54,7 @@ public class BeautyBean implements Parcelable {
         dest.writeString(who);
         dest.writeInt(width);
         dest.writeInt(height);
+        dest.writeFloat(scale);
     }
 
     @Override
@@ -151,6 +154,14 @@ public class BeautyBean implements Parcelable {
         this.height = height;
     }
 
+    public float getScale() {
+        return scale;
+    }
+
+    public void setScale(float scale) {
+        this.scale = scale;
+    }
+
     public void copy(BeautyDao dao) {
         if (null == dao) {
             return;
@@ -166,5 +177,6 @@ public class BeautyBean implements Parcelable {
         setWho(dao.getWho());
         setWidth(dao.getWidth());
         setHeight(dao.getHeight());
+        setScale(dao.getScale());
     }
 }

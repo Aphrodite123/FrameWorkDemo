@@ -25,7 +25,10 @@ import com.aphrodite.framework.utils.NetworkUtils;
 import com.aphrodite.framework.utils.ObjectUtils;
 import com.aphrodite.framework.utils.UrlUtils;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -37,6 +40,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import butterknife.BindView;
 import io.reactivex.Observable;
@@ -93,6 +99,19 @@ public class RecommendListFragment extends BaseFragment {
     protected void initListener() {
         mRefreshRecyclerView.setOnRefreshListener(mRefreshListener);
         mRefreshRecyclerView.setOnLoadMoreListener(mLoadMoreListener);
+
+        mRefreshRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    Glide.with(getContext()).resumeRequests();
+                } else {
+                    Glide.with(getContext()).pauseRequests();
+                }
+            }
+        });
+
     }
 
     @Override
@@ -159,34 +178,22 @@ public class RecommendListFragment extends BaseFragment {
                         if (null == recommendContentBean) {
                             return null;
                         }
-
                         String url = recommendContentBean.getUrl().trim();
                         if (TextUtils.isEmpty(url) || !UrlUtils.checkUrl(url)) {
                             return null;
                         }
-
-                        Bitmap bitmap = null;
-
-                        try {
-                            bitmap = Glide.with(getContext())
-                                    .asBitmap()
-                                    .load(url)
-                                    .skipMemoryCache(true)
-                                    .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-                                    .get();
-                            if (null != bitmap) {
-                                int width = bitmap.getWidth();
-                                int height = bitmap.getHeight();
-                                recommendContentBean.setWidth(width);
-                                recommendContentBean.setHeight(height);
-                            }
-                        } catch (ExecutionException e) {
-                            LogUtils.e("Enter queryBeauty method." + e);
-                            return recommendContentBean;
-                        } finally {
-                            bitmap.recycle();
-                            bitmap = null;
-                        }
+                        Glide.with(getContext())
+                                .asBitmap()
+                                .load(url)
+                                .skipMemoryCache(true)                      //禁止Glide内存缓存
+                                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)  //不缓存资源
+                                .into(new SimpleTarget<Bitmap>() {
+                                    @Override
+                                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                                        recommendContentBean.setWidth(resource.getWidth());
+                                        recommendContentBean.setHeight(resource.getHeight());
+                                    }
+                                });
                         return recommendContentBean;
                     }
                 })

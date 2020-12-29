@@ -25,6 +25,7 @@ public class BeautyDao implements Parcelable, RealmModel {
     private String who;
     private int width;
     private int height;
+    private float scale;
 
     public BeautyDao() {
     }
@@ -41,6 +42,7 @@ public class BeautyDao implements Parcelable, RealmModel {
         who = in.readString();
         width = in.readInt();
         height = in.readInt();
+        scale = in.readFloat();
     }
 
     @Override
@@ -55,6 +57,7 @@ public class BeautyDao implements Parcelable, RealmModel {
         dest.writeString(who);
         dest.writeInt(width);
         dest.writeInt(height);
+        dest.writeFloat(scale);
     }
 
     @Override
@@ -154,6 +157,14 @@ public class BeautyDao implements Parcelable, RealmModel {
         this.height = height;
     }
 
+    public float getScale() {
+        return scale;
+    }
+
+    public void setScale(float scale) {
+        this.scale = scale;
+    }
+
     public void copy(BeautyBean bean) {
         if (null == bean) {
             return;
@@ -169,5 +180,6 @@ public class BeautyDao implements Parcelable, RealmModel {
         setWho(bean.getWho());
         setWidth(bean.getWidth());
         setHeight(bean.getHeight());
+        setScale(bean.getScale());
     }
 }
