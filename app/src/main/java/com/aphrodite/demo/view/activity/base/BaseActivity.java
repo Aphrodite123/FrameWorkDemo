@@ -1,6 +1,8 @@
 package com.aphrodite.demo.view.activity.base;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +23,8 @@ import com.aphrodite.framework.view.widget.dialog.LoadingDialog;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -447,6 +451,40 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param view
      */
     public void clickRightText(View view) {
+    }
+
+    /**
+     * Check if permissions are available.
+     *
+     * @param permissions
+     * @return
+     */
+    @TargetApi(Build.VERSION_CODES.M)
+    protected boolean hasPermission(String[] permissions) {
+        boolean hasPermission = true;
+        if (ObjectUtils.isEmpty(permissions)) {
+            return true;
+        }
+
+        for (String str : permissions) {
+            hasPermission = hasPermission && ContextCompat.checkSelfPermission(this, str) == PackageManager.PERMISSION_GRANTED;
+        }
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasPermission;
+    }
+
+    /**
+     * Request permissions.
+     *
+     * @param permissions
+     * @param requestCode
+     */
+    @TargetApi(Build.VERSION_CODES.M)
+    protected void requestPermission(String[] permissions, int requestCode) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return;
+        }
+
+        ActivityCompat.requestPermissions(this, permissions, requestCode);
     }
 
 }

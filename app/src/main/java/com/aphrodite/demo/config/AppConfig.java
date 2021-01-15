@@ -30,4 +30,25 @@ public class AppConfig extends BaseConfig {
         int RECOMMEND = BASE + 2;
     }
 
+    /**
+     * 权限
+     */
+    public interface PermissionType {
+        int BASE = 0x0000;
+
+        int WRITE_EXTERNAL_PERMISSION = BASE + 1;
+
+        int REQUEST_CALL_PERMISSION = BASE + 2;
+
+        int OVERLAY_PERMISSION = BASE + 3;
+
+        int CAMERA_PERMISSION = BASE + 4;
+
+        int LOCATION_PERMISSION = BASE + 5;
+
+        int PHONE_PERMISSION = BASE + 6;
+
+        int CONTACTS_PERMISSION = BASE+7;
+    }
+
 }

@@ -34,8 +34,8 @@
             <TextView
                 style="@style/select_item_view"
                 android:drawableLeft="@drawable/baby_info"
-                android:drawablePadding="@dimen/options_item_icon_right_margin"
                 android:drawableRight="@drawable/arrow_right"
+                android:drawablePadding="@dimen/options_item_icon_right_margin"
                 android:text="@string/beauty_title"
                 android:textColor="@color/color_e6000000"
                 android:textSize="@dimen/font13" />
@@ -48,8 +48,8 @@
             android:id="@+id/beauty_more"
             style="@style/select_item_view"
             android:drawableLeft="@drawable/baby_info"
-            android:drawablePadding="@dimen/options_item_icon_right_margin"
             android:drawableRight="@drawable/arrow_right"
+            android:drawablePadding="@dimen/options_item_icon_right_margin"
             android:text="@string/recommend_more"
             android:textColor="@color/color_e6000000"
             android:textSize="@dimen/font13" />
@@ -60,9 +60,21 @@
             android:id="@+id/video_more"
             style="@style/select_item_view"
             android:drawableLeft="@drawable/baby_info"
-            android:drawablePadding="@dimen/options_item_icon_right_margin"
             android:drawableRight="@drawable/arrow_right"
+            android:drawablePadding="@dimen/options_item_icon_right_margin"
             android:text="@string/video_more"
+            android:textColor="@color/color_e6000000"
+            android:textSize="@dimen/font13" />
+
+        <View style="@style/divide_line_my_fragment" />
+
+        <TextView
+            android:id="@+id/contacts"
+            style="@style/select_item_view"
+            android:drawableLeft="@drawable/baby_info"
+            android:drawableRight="@drawable/arrow_right"
+            android:drawablePadding="@dimen/options_item_icon_right_margin"
+            android:text="@string/contacts"
             android:textColor="@color/color_e6000000"
             android:textSize="@dimen/font13" />
 
