@@ -24,7 +24,7 @@
             android:src="@drawable/head_default" />
 
         <LinearLayout
-            android:id="@+id/beauty_recommend_ll"
+            android:id="@+id/home_page"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -36,7 +36,7 @@
                 android:drawableLeft="@drawable/baby_info"
                 android:drawableRight="@drawable/arrow_right"
                 android:drawablePadding="@dimen/options_item_icon_right_margin"
-                android:text="@string/beauty_title"
+                android:text="@string/home_page"
                 android:textColor="@color/color_e6000000"
                 android:textSize="@dimen/font13" />
 
@@ -45,36 +45,36 @@
         <View style="@style/divide_line_my_fragment" />
 
         <TextView
-            android:id="@+id/beauty_more"
+            android:id="@+id/group_page"
             style="@style/select_item_view"
             android:drawableLeft="@drawable/baby_info"
             android:drawableRight="@drawable/arrow_right"
             android:drawablePadding="@dimen/options_item_icon_right_margin"
-            android:text="@string/recommend_more"
+            android:text="@string/group_page"
             android:textColor="@color/color_e6000000"
             android:textSize="@dimen/font13" />
 
         <View style="@style/divide_line_my_fragment" />
 
         <TextView
-            android:id="@+id/video_more"
+            android:id="@+id/topic_page"
             style="@style/select_item_view"
             android:drawableLeft="@drawable/baby_info"
             android:drawableRight="@drawable/arrow_right"
             android:drawablePadding="@dimen/options_item_icon_right_margin"
-            android:text="@string/video_more"
+            android:text="@string/topic_page"
             android:textColor="@color/color_e6000000"
             android:textSize="@dimen/font13" />
 
         <View style="@style/divide_line_my_fragment" />
 
         <TextView
-            android:id="@+id/contacts"
+            android:id="@+id/user_page"
             style="@style/select_item_view"
             android:drawableLeft="@drawable/baby_info"
             android:drawableRight="@drawable/arrow_right"
             android:drawablePadding="@dimen/options_item_icon_right_margin"
-            android:text="@string/contacts"
+            android:text="@string/user_page"
             android:textColor="@color/color_e6000000"
             android:textSize="@dimen/font13" />
 

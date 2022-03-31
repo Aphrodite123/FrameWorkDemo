@@ -12,7 +12,7 @@ import butterknife.OnClick;
 /**
  * Created by Aphrodite on 2021/1/11.
  */
-public class ContactsFragment extends BaseFragment {
+public class UserFragment extends BaseFragment {
     @Override
     protected int getViewId() {
         return R.layout.fragment_contacts;
@@ -20,7 +20,7 @@ public class ContactsFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        setTitleText(R.string.contacts);
+        setTitleText(R.string.user_page);
         setTitleColor(Color.BLACK);
     }
 

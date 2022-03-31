@@ -3,6 +3,9 @@ package com.aphrodite.demo.view.fragment;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.aphrodite.demo.BuildConfig;
 import com.aphrodite.demo.R;
@@ -27,7 +30,6 @@ import com.aphrodite.framework.utils.UrlUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 
 import org.jsoup.Jsoup;
@@ -38,7 +40,6 @@ import org.jsoup.select.Elements;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -76,6 +77,12 @@ public class RecommendListFragment extends BaseFragment {
     private List<RecommendContentBean> mContentBeans;
 
     private BeautyListAdapter mBeautyListAdapter;
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
 
     @Override
     protected int getViewId() {

@@ -59,7 +59,7 @@ android {
     //自定义APK名称,多渠道打包
     applicationVariants.all { variant ->
         variant.outputs.all {
-            outputFileName = "启蒙v" + defaultConfig.versionName + "_" + buildType.name + ".apk"
+            outputFileName = "干货v" + defaultConfig.versionName + "_" + buildType.name + ".apk"
         }
     }
 
@@ -93,8 +93,8 @@ dependencies {
     /**
      * Stetho调试 Realm
      */
-    implementation 'com.facebook.stetho:stetho:1.5.1'
-    implementation 'com.uphyca:stetho_realm:2.2.2'
+//    implementation 'com.facebook.stetho:stetho:1.5.1'
+//    implementation 'com.uphyca:stetho_realm:2.2.2'
     /**
      * Jsoup 网页爬虫
      */

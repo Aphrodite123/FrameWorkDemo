@@ -42,7 +42,7 @@ import io.realm.RealmResults;
 /**
  * Created by Aphrodite on 2019/5/29.
  */
-public class BeautyMoreFragment extends BaseFragment {
+public class GroupFragment extends BaseFragment {
     @BindView(R.id.beauty_more_type)
     HorizontalRecycleView mHorizontalRecycleView;
     @BindView(R.id.beauty_page)
@@ -55,7 +55,8 @@ public class BeautyMoreFragment extends BaseFragment {
 
     private RecommendMoreTabAdapter moreTabAdapter;
 
-    private int mPagerOffset = 1;
+    //页数，默认为1
+    private int mPage = 1;
 
     private List<RecommendTypeBean> mTypeBeans;
 
@@ -69,7 +70,7 @@ public class BeautyMoreFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        setTitleText(R.string.recommend_more);
+        setTitleText(R.string.group_page);
         setTitleColor(Color.BLACK);
 
         mHorizontalRecycleView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
@@ -114,7 +115,7 @@ public class BeautyMoreFragment extends BaseFragment {
             return;
         }
 
-        mRequestApi.queryMore(HttpConfig.URL_MORE_BEAUTY, mPagerOffset)
+        mRequestApi.queryMore(HttpConfig.URL_MORE_BEAUTY, mPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {

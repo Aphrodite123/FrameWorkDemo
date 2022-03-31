@@ -34,5 +34,5 @@ public interface RequestApi {
     );
 
     @GET()
-    Observable<String> queryMore(@Url() String url, @Query("pager_offset") int pagerOffset);
+    Observable<String> queryMore(@Url() String url, @Query("page") int pagerOffset);
 }

@@ -12,7 +12,7 @@ import com.aphrodite.framework.model.network.api.RetrofitInitial;
 /**
  * Created by Aphrodite on 2019/8/15.
  */
-public class VideoMoreFragment extends BaseFragment {
+public class TopicFragment extends BaseFragment {
     private RetrofitInitial mRetrofitInit;
     private RequestApi mRequestApi;
 
@@ -23,7 +23,7 @@ public class VideoMoreFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        setTitleText(R.string.video_more);
+        setTitleText(R.string.topic_page);
         setTitleColor(Color.BLACK);
     }
 
